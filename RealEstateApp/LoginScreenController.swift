@@ -11,41 +11,34 @@ import Foundation
 
 class LoginScreenController: UIViewController {
     
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-      // scrollView.isScrollEnabled = false
-        registerForKeyboardNotifications()
-        
-        //////// Still doesn't work 
-        
-        
-        
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(self.doneEditing)))
-        
-        
-        
-        
-        
-        
-        
-        //////
-    }
-    
-    func doneEditing() {
-        print("done editing")
-        //self.view.endEditing(true)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     //MARK: Properties
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var activeField: UITextField!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+        scrollView.isScrollEnabled = false
+        
+        registerForKeyboardNotifications()
+        
+        // Add gesture recognizers to dismiss keyboard
+        // Tap gesture
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(doneEditing)))
+        
+        // Swipe down gesture
+        let swipeRecognizer: UISwipeGestureRecognizer  = UISwipeGestureRecognizer(target: self, action: #selector(doneEditing))
+        swipeRecognizer.direction = UISwipeGestureRecognizerDirection.down
+        self.view.addGestureRecognizer(swipeRecognizer)
+    }
+    
+    // Make keyboard dismiss
+    func doneEditing() {
+        scrollView.endEditing(true)
+    }
+    
+ 
     
     // Code originated from https://developer.apple.com/library/content/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
     // Converted with Swiftify v1.0.6381 - https://objectivec2swift.com/
@@ -53,15 +46,15 @@ class LoginScreenController: UIViewController {
     // Call this method somewhere in your view controller setup code.
     
     func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         
-        //        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     // Called when the UIKeyboardDidShowNotification is sent.
     @objc func keyboardWillShow(_ aNotification: Notification) {
-        print("keyboard displayed")
+        scrollView.isScrollEnabled = true
         
         let info: [AnyHashable: Any]? = aNotification.userInfo
         let kbSize: CGSize? = (info?[UIKeyboardFrameBeginUserInfoKey] as? CGRect)?.size
@@ -77,20 +70,14 @@ class LoginScreenController: UIViewController {
             scrollView?.scrollRectToVisible((activeField?.frame)!, animated: true)
         }
         
+        scrollView.isScrollEnabled = false
     }
 
     
     // Called when the UIKeyboardWillHideNotification is sent
     @objc func keyboardWillBeHidden(_ aNotification: Notification) {
-        print("keyboard gone")
-        
-        
-        
-        
-        
-        //        let contentInsets: UIEdgeInsets = UIEdgeInsets.zero
-        //        scrollView?.contentInset = contentInsets
-        //        scrollView?.scrollIndicatorInsets = contentInsets
+        scrollView.isScrollEnabled = true
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     
