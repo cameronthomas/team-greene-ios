@@ -13,7 +13,7 @@ class LoginScreenController: UIViewController {
     
     //MARK: Properties
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var activeField: UITextField!
+    var activeField: UITextField!
     
     
     override func viewDidLoad() {
@@ -39,6 +39,9 @@ class LoginScreenController: UIViewController {
     }
     
  
+    @IBAction func textFieldDidBecomeActive(_ sender: UITextField) {
+        activeField = sender
+    }
     
     // Code originated from https://developer.apple.com/library/content/documentation/StringsTextFonts/Conceptual/TextAndWebiPhoneOS/KeyboardManagement/KeyboardManagement.html
     // Converted with Swiftify v1.0.6381 - https://objectivec2swift.com/
@@ -76,7 +79,7 @@ class LoginScreenController: UIViewController {
     
     // Called when the UIKeyboardWillHideNotification is sent
     @objc func keyboardWillBeHidden(_ aNotification: Notification) {
-        scrollView.isScrollEnabled = true
+        scrollView.isScrollEnabled = false
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
