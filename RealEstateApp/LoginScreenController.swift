@@ -8,6 +8,8 @@
 
 import UIKit
 import Foundation
+import AeroGearHttp
+import AeroGearOAuth2
 
 class LoginScreenController: UIViewController {
     

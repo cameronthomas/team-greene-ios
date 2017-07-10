@@ -16,6 +16,7 @@
 		311AEC331F0597B2001408F6 /* RealEstateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC321F0597B2001408F6 /* RealEstateAppTests.swift */; };
 		311AEC3E1F0597B2001408F6 /* RealEstateAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC3D1F0597B2001408F6 /* RealEstateAppUITests.swift */; };
 		3197D3A41F08C8F300968222 /* KeyboardUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3197D3A31F08C8F300968222 /* KeyboardUtils.swift */; };
+		76F88AA4B542395EABA8C614 /* Pods_RealEstateApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD817D6AC13B76EC20AEFF1B /* Pods_RealEstateApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,9 @@
 		311AEC3D1F0597B2001408F6 /* RealEstateAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateAppUITests.swift; sourceTree = "<group>"; };
 		311AEC3F1F0597B2001408F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3197D3A31F08C8F300968222 /* KeyboardUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardUtils.swift; sourceTree = "<group>"; };
+		40C7FEB93E643F795E229B1D /* Pods-RealEstateApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealEstateApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealEstateApp/Pods-RealEstateApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5D3F28389F0EC8AE57538AB8 /* Pods-RealEstateApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealEstateApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealEstateApp/Pods-RealEstateApp.release.xcconfig"; sourceTree = "<group>"; };
+		CD817D6AC13B76EC20AEFF1B /* Pods_RealEstateApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealEstateApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F88AA4B542395EABA8C614 /* Pods_RealEstateApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24D2F62617EE7988F1BCC4E4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				40C7FEB93E643F795E229B1D /* Pods-RealEstateApp.debug.xcconfig */,
+				5D3F28389F0EC8AE57538AB8 /* Pods-RealEstateApp.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		311AEC0E1F0597B1001408F6 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +99,8 @@
 				311AEC311F0597B2001408F6 /* RealEstateAppTests */,
 				311AEC3C1F0597B2001408F6 /* RealEstateAppUITests */,
 				311AEC181F0597B1001408F6 /* Products */,
+				24D2F62617EE7988F1BCC4E4 /* Pods */,
+				827FEE1090B1D99203E61AB5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +147,14 @@
 			path = RealEstateAppUITests;
 			sourceTree = "<group>";
 		};
+		827FEE1090B1D99203E61AB5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD817D6AC13B76EC20AEFF1B /* Pods_RealEstateApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,9 +162,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 311AEC421F0597B2001408F6 /* Build configuration list for PBXNativeTarget "RealEstateApp" */;
 			buildPhases = (
+				A34957A96C7DE809F150298C /* [CP] Check Pods Manifest.lock */,
 				311AEC131F0597B1001408F6 /* Sources */,
 				311AEC141F0597B1001408F6 /* Frameworks */,
 				311AEC151F0597B1001408F6 /* Resources */,
+				4CBD906FEA485A7682A4D4C5 /* [CP] Embed Pods Frameworks */,
+				8F1191A850040593F9C28A16 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,6 +289,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4CBD906FEA485A7682A4D4C5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RealEstateApp/Pods-RealEstateApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F1191A850040593F9C28A16 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RealEstateApp/Pods-RealEstateApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A34957A96C7DE809F150298C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		311AEC131F0597B1001408F6 /* Sources */ = {
@@ -423,6 +498,7 @@
 		};
 		311AEC431F0597B2001408F6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40C7FEB93E643F795E229B1D /* Pods-RealEstateApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KKPB8LUQSQ;
@@ -436,6 +512,7 @@
 		};
 		311AEC441F0597B2001408F6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D3F28389F0EC8AE57538AB8 /* Pods-RealEstateApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = KKPB8LUQSQ;
