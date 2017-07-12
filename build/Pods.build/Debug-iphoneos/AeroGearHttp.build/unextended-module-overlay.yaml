@@ -1,0 +1,13 @@
+{
+  'version': 0,
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': '/Users/cameronthomas/Desktop/BYU-I/10. BYU-I Spring 2017/iOS/RealEstateApp/build/Debug-iphoneos/AeroGearHttp/AeroGearHttp.framework/Modules'
+    'contents': [{
+      'type': 'file',
+      'name': 'module.modulemap',
+      'external-contents': '/Users/cameronthomas/Desktop/BYU-I/10. BYU-I Spring 2017/iOS/RealEstateApp/build/Pods.build/Debug-iphoneos/AeroGearHttp.build/unextended-module.modulemap',
+    }]
+  }]
+}

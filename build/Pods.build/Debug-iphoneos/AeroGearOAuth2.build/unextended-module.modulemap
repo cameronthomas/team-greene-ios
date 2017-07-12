@@ -1,0 +1,10 @@
+framework module AeroGearOAuth2 {
+  umbrella header "AeroGearOAuth2-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module AeroGearOAuth2.__Swift {
+    exclude header "AeroGearOAuth2-Swift.h"
+}
