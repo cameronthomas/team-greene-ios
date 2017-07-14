@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="wLu-dY-lcU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HTt-hm-p1B">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -137,6 +137,15 @@
                     <view key="view" contentMode="scaleToFill" id="70g-gc-aQq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weekly Meeting Info" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CF-bS-sGh">
+                                <rect key="frame" x="16" y="72" width="256" height="131"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Weekly Meeting Info" id="yZb-dz-59h"/>
@@ -145,7 +154,7 @@
             </objects>
             <point key="canvasLocation" x="1729" y="1178"/>
         </scene>
-        <!--Accountability Partner Info-->
+        <!--Accountability Partner Contact Info-->
         <scene sceneID="l2a-ay-20b">
             <objects>
                 <viewController id="hWD-vM-wym" sceneMemberID="viewController">
@@ -156,13 +165,25 @@
                     <view key="view" contentMode="scaleToFill" id="Mqs-yo-e0h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FR2-GK-JsZ">
+                                <rect key="frame" x="16" y="72" width="256" height="131"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">John Doe
+208-123-4567
+thisIsMyEamil@gmail.com</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Accountability Partner Info" id="A2x-p9-cE0"/>
+                    <navigationItem key="navigationItem" title="Accountability Partner Contact Info" id="A2x-p9-cE0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q16-ke-LMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2606" y="1114"/>
+            <point key="canvasLocation" x="2605.5999999999999" y="1113.1934032983509"/>
         </scene>
         <!--Weekly Videos-->
         <scene sceneID="zPk-1R-SId">
@@ -196,7 +217,7 @@
         <!--Give Feedback-->
         <scene sceneID="cue-h1-Ffh">
             <objects>
-                <viewController id="g3H-wj-26N" sceneMemberID="viewController">
+                <viewController id="g3H-wj-26N" customClass="FeedbackController" customModule="RealEstateApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ffC-9p-Foz"/>
                         <viewControllerLayoutGuide type="bottom" id="4mK-qa-5V0"/>
@@ -204,13 +225,62 @@
                     <view key="view" contentMode="scaleToFill" id="wOS-Cm-GtF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7o-0k-KdY">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TRj-Kf-40h">
+                                        <rect key="frame" x="52" y="24" width="255" height="171"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What could we improve about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pF-e2-GC2">
+                                        <rect key="frame" x="26" y="227" width="322" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azq-y5-Gmo">
+                                        <rect key="frame" x="127" y="471" width="120" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Submit Feedback"/>
+                                        <connections>
+                                            <action selector="sendFeedbackEmail:" destination="g3H-wj-26N" eventType="touchUpInside" id="aDA-cw-999"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What do you like about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mos-g1-1wx">
+                                        <rect key="frame" x="52" y="-37" width="270" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dSP-D3-OX4">
+                                        <rect key="frame" x="52" y="270" width="255" height="171"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Give Feedback" id="jLW-pK-Wr5"/>
+                    <connections>
+                        <outlet property="improvementFeedback" destination="dSP-D3-OX4" id="piC-QW-ZJR"/>
+                        <outlet property="positiveFeedback" destination="TRj-Kf-40h" id="YcL-OU-ted"/>
+                        <outlet property="scrollView" destination="p7o-0k-KdY" id="dMo-ic-7Du"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1V-DD-9WH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3310" y="278"/>
+            <point key="canvasLocation" x="3309.5999999999999" y="276.61169415292358"/>
         </scene>
         <!--Login Screen Controller-->
         <scene sceneID="fkB-0J-dMb">
@@ -234,6 +304,7 @@
                                 <state key="normal" title="Login with Infusionsoft"/>
                                 <connections>
                                     <action selector="infusionsoftAuthenticate:" destination="wLu-dY-lcU" eventType="touchUpInside" id="yV8-Hd-HEr"/>
+                                    <segue destination="HTt-hm-p1B" kind="show" id="MBl-zV-BJR"/>
                                 </connections>
                             </button>
                         </subviews>
