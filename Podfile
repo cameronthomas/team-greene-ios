@@ -4,5 +4,6 @@ target 'RealEstateApp' do
     use_frameworks!
 
     # Pods for RealEstateApp
-    
+    pod 'Google/SignIn'
+    pod 'GoogleAPIClientForREST/Sheets'
 end

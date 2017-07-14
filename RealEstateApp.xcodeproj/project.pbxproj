@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		310475BF1F18936A0081CFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 310475BE1F18936A0081CFD4 /* GoogleService-Info.plist */; };
+		310475C01F18936A0081CFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 310475BE1F18936A0081CFD4 /* GoogleService-Info.plist */; };
+		310475C11F18936A0081CFD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 310475BE1F18936A0081CFD4 /* GoogleService-Info.plist */; };
 		311AEC1B1F0597B1001408F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC1A1F0597B1001408F6 /* AppDelegate.swift */; };
 		311AEC1D1F0597B1001408F6 /* LoginScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC1C1F0597B1001408F6 /* LoginScreenController.swift */; };
 		311AEC201F0597B1001408F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311AEC1E1F0597B1001408F6 /* Main.storyboard */; };
@@ -15,6 +18,7 @@
 		311AEC281F0597B1001408F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311AEC261F0597B1001408F6 /* LaunchScreen.storyboard */; };
 		311AEC331F0597B2001408F6 /* RealEstateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC321F0597B2001408F6 /* RealEstateAppTests.swift */; };
 		311AEC3E1F0597B2001408F6 /* RealEstateAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC3D1F0597B2001408F6 /* RealEstateAppUITests.swift */; };
+		312007731F188A64007587E5 /* PartnerContactInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312007721F188A64007587E5 /* PartnerContactInfoController.swift */; };
 		315D349B1F16BB160084197C /* FeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315D349A1F16BB160084197C /* FeedbackController.swift */; };
 		76F88AA4B542395EABA8C614 /* Pods_RealEstateApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD817D6AC13B76EC20AEFF1B /* Pods_RealEstateApp.framework */; };
 /* End PBXBuildFile section */
@@ -37,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		310475BE1F18936A0081CFD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		311AEC171F0597B1001408F6 /* RealEstateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		311AEC1A1F0597B1001408F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		311AEC1C1F0597B1001408F6 /* LoginScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenController.swift; sourceTree = "<group>"; };
@@ -51,6 +56,7 @@
 		311AEC391F0597B2001408F6 /* RealEstateAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealEstateAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		311AEC3D1F0597B2001408F6 /* RealEstateAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateAppUITests.swift; sourceTree = "<group>"; };
 		311AEC3F1F0597B2001408F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		312007721F188A64007587E5 /* PartnerContactInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerContactInfoController.swift; sourceTree = "<group>"; };
 		315D349A1F16BB160084197C /* FeedbackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
 		40C7FEB93E643F795E229B1D /* Pods-RealEstateApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealEstateApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealEstateApp/Pods-RealEstateApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5D3F28389F0EC8AE57538AB8 /* Pods-RealEstateApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealEstateApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealEstateApp/Pods-RealEstateApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,10 +126,12 @@
 				311AEC1A1F0597B1001408F6 /* AppDelegate.swift */,
 				311AEC1C1F0597B1001408F6 /* LoginScreenController.swift */,
 				315D349A1F16BB160084197C /* FeedbackController.swift */,
+				312007721F188A64007587E5 /* PartnerContactInfoController.swift */,
 				311AEC1E1F0597B1001408F6 /* Main.storyboard */,
 				311AEC241F0597B1001408F6 /* Assets.xcassets */,
 				311AEC261F0597B1001408F6 /* LaunchScreen.storyboard */,
 				311AEC291F0597B1001408F6 /* Info.plist */,
+				310475BE1F18936A0081CFD4 /* GoogleService-Info.plist */,
 				311AEC211F0597B1001408F6 /* RealEstateApp.xcdatamodeld */,
 			);
 			path = RealEstateApp;
@@ -268,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				310475BF1F18936A0081CFD4 /* GoogleService-Info.plist in Resources */,
 				311AEC281F0597B1001408F6 /* LaunchScreen.storyboard in Resources */,
 				311AEC251F0597B1001408F6 /* Assets.xcassets in Resources */,
 				311AEC201F0597B1001408F6 /* Main.storyboard in Resources */,
@@ -278,6 +287,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				310475C01F18936A0081CFD4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				310475C11F18936A0081CFD4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +358,7 @@
 				311AEC1D1F0597B1001408F6 /* LoginScreenController.swift in Sources */,
 				311AEC1B1F0597B1001408F6 /* AppDelegate.swift in Sources */,
 				311AEC231F0597B1001408F6 /* RealEstateApp.xcdatamodeld in Sources */,
+				312007731F188A64007587E5 /* PartnerContactInfoController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

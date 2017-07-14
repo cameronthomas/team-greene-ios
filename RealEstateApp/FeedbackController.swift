@@ -27,6 +27,7 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate 
     // Create and open mail view controller
     @IBAction func sendFeedbackEmail(_ sender: UIButton) {
         
+        // Return if both fields are blank
         guard positiveFeedback.text != "" || improvementFeedback.text != "" else {
             return
         }
@@ -57,6 +58,7 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate 
         
         mailViewController.setToRecipients(["cct2491@gmail.com", "cameroncthomas1@gmail.com"])
         
+        // Build HTML for email body
         if (positiveFeedback.text != "") {
             emailBody = "<span style=\"font-weight: bold\">Positive Feedback</span><br/>" + positiveFeedback.text! + "<br/><br/>"
         }
