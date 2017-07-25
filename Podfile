@@ -5,5 +5,5 @@ target 'RealEstateApp' do
 
     # Pods for RealEstateApp
     pod 'Google/SignIn'
-    pod 'GoogleAPIClientForREST/Sheets'
+# pod 'GoogleAPIClientForREST/Sheets'
 end

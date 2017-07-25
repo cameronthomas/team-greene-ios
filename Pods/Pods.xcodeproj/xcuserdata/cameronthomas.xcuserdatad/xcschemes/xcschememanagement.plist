@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GoogleAPIClientForREST.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +32,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2A1A9CC99D0A075881B2E625E3308DE4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>96AA539E19AE89F27289F5B769759145</key>
+		<key>681BE6E3D02A43F9BA63777AC435C8FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E0F7D77396D218B9A370B128FD3A89C0</key>
+		<key>CCBF1F2FBEE6F6A05ADAB15018759C98</key>
 		<dict>
 			<key>primary</key>
 			<true/>

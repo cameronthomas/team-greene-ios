@@ -157,7 +157,7 @@
         <!--Accountability Partner Contact Info-->
         <scene sceneID="l2a-ay-20b">
             <objects>
-                <viewController id="hWD-vM-wym" sceneMemberID="viewController">
+                <viewController id="hWD-vM-wym" customClass="PartnerContactInfoController" customModule="RealEstateApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W1B-JK-zMT"/>
                         <viewControllerLayoutGuide type="bottom" id="Sju-Up-tBL"/>
@@ -176,6 +176,14 @@ thisIsMyEamil@gmail.com</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUl-fW-F8K">
+                                <rect key="frame" x="139" y="338" width="96" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Google SignIn"/>
+                                <connections>
+                                    <action selector="GoogleSignInButton:" destination="hWD-vM-wym" eventType="touchUpInside" id="RMT-HG-u6p"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -320,7 +328,7 @@ thisIsMyEamil@gmail.com</string>
             <objects>
                 <navigationController storyboardIdentifier="NavController" automaticallyAdjustsScrollViewInsets="NO" id="HTt-hm-p1B" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="zOS-HS-8F5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="zOS-HS-8F5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

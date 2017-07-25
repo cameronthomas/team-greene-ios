@@ -8,9 +8,16 @@
 
 import UIKit
 
-class PartnerContactInfoController: UIViewController {
+class PartnerContactInfoController: UIViewController, GIDSignInUIDelegate {
 
+    @IBAction func GoogleSignInButton(_ sender: Any) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
 }
