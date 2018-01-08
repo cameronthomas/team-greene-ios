@@ -18,8 +18,20 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize.height = 1000 
+        scrollView.contentSize.height = 1000
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.touchedScreen(gesture:)))
+        self.view.addGestureRecognizer(tapGesture)
+        
+        //self.scrollView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0)
     }
+    
+    // Dismiss keyboard when outside of text boxes in tappedd
+    func touchedScreen(gesture: UITapGestureRecognizer) {
+        positiveFeedback.resignFirstResponder()
+        improvementFeedback.resignFirstResponder()
+    }
+    
     
     // Followed example at https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/
     // for sending emails

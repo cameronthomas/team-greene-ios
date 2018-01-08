@@ -10,41 +10,41 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        var configureError: NSError?
+       // var configureError: NSError?
 
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        
-        if (configureError != nil) {
-            print("We have an error! \(configureError)")
-        }
-        
-        GIDSignIn.sharedInstance().delegate = self
+//        GGLContext.sharedInstance().configureWithError(&configureError)
+//        
+//        if (configureError != nil) {
+//            print("We have an error! \(configureError)")
+//        }
+//        
+//        GIDSignIn.sharedInstance().delegate = self
 
         return true
     }
     
     
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        if (error != nil) {
-            print("There is a singin error: \(error)")
-        } else {
-            print("We are signed in!: \(user)")
-        }
-    }
+//    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+//        if (error != nil) {
+//            print("There is a singin error: \(error)")
+//        } else {
+//            print("We are signed in!: \(user)")
+//        }
+//    }
 
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-//        return GIDSignIn.sharedInstance().handle(url,
-//                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!,
-//                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
-        return true
-    }
+//    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+//
+////        return GIDSignIn.sharedInstance().handle(url,
+////                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String!,
+////                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+//        return true
+//    }
 
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -114,6 +114,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    
+    func application(_ app: UIApplication,
+                     open url: URL,
+                     options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        // you should probably first check if this is the callback being opened
+        // if <# check #> {
+        // if your oauth2 instance lives somewhere else, adapt accordingly
+        print(url.absoluteString)
+        //  }
+        return true
     }
 
 }

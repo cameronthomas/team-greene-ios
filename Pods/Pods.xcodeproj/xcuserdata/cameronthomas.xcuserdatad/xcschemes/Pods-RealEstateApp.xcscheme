@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CCBF1F2FBEE6F6A05ADAB15018759C98"
+               BlueprintIdentifier = "C4D9AB389193F804B2FA27820F90578C"
                BuildableName = "Pods_RealEstateApp.framework"
                BlueprintName = "Pods-RealEstateApp"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -36,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "CCBF1F2FBEE6F6A05ADAB15018759C98"
+            BlueprintIdentifier = "C4D9AB389193F804B2FA27820F90578C"
             BuildableName = "Pods_RealEstateApp.framework"
             BlueprintName = "Pods-RealEstateApp"
             ReferencedContainer = "container:Pods.xcodeproj">

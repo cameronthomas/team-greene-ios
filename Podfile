@@ -1,9 +1,11 @@
 platform :ios, '9.0'
-
-target 'RealEstateApp' do
     use_frameworks!
 
-    # Pods for RealEstateApp
-    pod 'Google/SignIn'
-# pod 'GoogleAPIClientForREST/Sheets'
+target 'RealEstateApp' do
+    pod 'WistiaKitCore'
+    pod 'WistiaKit'
+    pod 'AeroGearHttp'
+    pod 'AeroGearOAuth2'
+    pod 'p2.OAuth2'
+    pod 'OAuthSwift'
 end
