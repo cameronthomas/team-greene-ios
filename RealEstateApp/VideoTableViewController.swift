@@ -9,29 +9,24 @@
 import UIKit
 import AVKit
 
-class VideoTableViewController: UITableViewController, playVideoDelegate  {
-    @IBOutlet weak var videoTableView: UITableView!
-    
-    var tempArray = [Int]()
+class VideoTableViewController: UITableViewController, playVideoDelegate  {    
     var videoData: [Dictionary<String, String>] = []
+    var recievedData:String!
+    
+    // NEED TO CHANGE THIS
+    let VIDEO_COUNT = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        for index in 0...14 {
-            tempArray.append(index)
-        }
-        
-        
         // Modified from example at
         // https://code.bradymower.com/swift-3-apis-network-requests-json-getting-the-data-4aaae8a5efc0
-       let urlString = URL(string: "https://api.wistia.com/v1/medias.json?api_password=432b01328ff893e5bdaa37d219e3c701437a842409fe644ce0ea062ff0f1ddc3")
+       let urlString = URL(string: "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4")
 
         if let url = urlString {
             let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -73,15 +68,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
                 }
 
             }
-
             task.resume()
-
-
         }
         
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+//        DispatchQueue.main.async {
+//            self.tableView.reloadData()
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -93,7 +85,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return tempArray.count
+        return VIDEO_COUNT
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,13 +94,14 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // print(indexPath.section)
         let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoTableViewCell
         
 //        print(indexPath.section)
 //        if !videoData.isEmpty {
             cell.delegate = self
             cell.cellNumber = indexPath.section
-//            cell.videoLabel.text = String(videoData[indexPath.section]["name"]!)
+        //            cell.videoLabel.text = String(videoData[indexPath.section]["name"]!)
 //        }
         
         return cell
@@ -132,6 +125,13 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         }
     }
 
+    
+    
+    
+    
+    
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -167,14 +167,13 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
+/*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
-
+ */
 }

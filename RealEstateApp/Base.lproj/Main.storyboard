@@ -12,7 +12,7 @@
         <!--Team Greene Master Class-->
         <scene sceneID="3KE-6r-p9w">
             <objects>
-                <tableViewController id="lVy-sm-uaE" sceneMemberID="viewController">
+                <tableViewController id="lVy-sm-uaE" customClass="MainTableViewController" customModule="RealEstateApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="P0I-w3-OpR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,7 +37,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="dQ7-ex-rB0" kind="show" id="fMp-lv-uSB"/>
+                                            <segue destination="dQ7-ex-rB0" kind="show" identifier="VideoTableViewControllerSegue" id="qu1-sQ-dD7"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -86,30 +86,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="hWD-vM-wym" kind="show" identifier="HomeScreentoAccountPartnerInfo" id="bvQ-ak-Gnf"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                            <tableViewSection id="F20-ZF-uKF">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WeelyMeetingInfoCell" id="cv5-Ie-Hq1">
-                                        <rect key="frame" x="0.0" y="132" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cv5-Ie-Hq1" id="aMy-Ic-W0P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weekly Meeting Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNd-Xi-Qe0">
-                                                    <rect key="frame" x="87" y="8" width="200" height="27"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="EqL-RH-UTy" kind="show" identifier="HomeScreenToWeeklyMeetingInfo" id="3yl-MO-DKs"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -167,34 +143,6 @@
             </objects>
             <point key="canvasLocation" x="3060" y="-615.74212893553226"/>
         </scene>
-        <!--Weekly Meeting Info-->
-        <scene sceneID="xfz-L9-aBV">
-            <objects>
-                <viewController id="EqL-RH-UTy" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="AeQ-6z-wQS"/>
-                        <viewControllerLayoutGuide type="bottom" id="MAP-G7-pei"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="70g-gc-aQq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weekly Meeting Info" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4CF-bS-sGh">
-                                <rect key="frame" x="16" y="72" width="256" height="131"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Weekly Meeting Info" id="yZb-dz-59h"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jmt-NG-hnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1729" y="1178"/>
-        </scene>
         <!--Accountability Partner Contact Info-->
         <scene sceneID="l2a-ay-20b">
             <objects>
@@ -213,34 +161,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q16-ke-LMV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2605.5999999999999" y="1113.1934032983509"/>
-        </scene>
-        <!--Video Page View Controller-->
-        <scene sceneID="taD-rA-iqB">
-            <objects>
-                <viewController id="h14-jf-JtV" customClass="VideoPageViewController" customModule="RealEstateApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="kSN-HK-HBz"/>
-                        <viewControllerLayoutGuide type="bottom" id="NJx-8F-hR5"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5Hr-ln-lG7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eOa-0B-3RE" customClass="WistiaFlatPlayerView" customModule="WistiaKit">
-                                <rect key="frame" x="24" y="150" width="327" height="365.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="playerView" destination="eOa-0B-3RE" id="BjI-Ji-cW9"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="COj-Mo-JTy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4634" y="-618"/>
         </scene>
         <!--Give Feedback-->
         <scene sceneID="cue-h1-Ffh">
@@ -310,10 +230,10 @@
             </objects>
             <point key="canvasLocation" x="3309.5999999999999" y="276.61169415292358"/>
         </scene>
-        <!--Login Screen Controller-->
+        <!--View Controller-->
         <scene sceneID="fkB-0J-dMb">
             <objects>
-                <viewController id="wLu-dY-lcU" customClass="LoginScreenController" customModule="RealEstateApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="wLu-dY-lcU" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Hb-vq-a0m"/>
                         <viewControllerLayoutGuide type="bottom" id="FAS-qT-v5I"/>
@@ -331,7 +251,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Login with Infusionsoft"/>
                                 <connections>
-                                    <action selector="infusionsoftAuthenticate:" destination="wLu-dY-lcU" eventType="touchUpInside" id="yV8-Hd-HEr"/>
                                     <segue destination="HTt-hm-p1B" kind="show" id="MBl-zV-BJR"/>
                                 </connections>
                             </button>

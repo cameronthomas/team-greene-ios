@@ -10,9 +10,6 @@ import UIKit
 import AVKit
 
 class PartnerContactInfoController: UIViewController {
-
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +22,5 @@ class PartnerContactInfoController: UIViewController {
         self.present(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
-    
-        
     }
 }
