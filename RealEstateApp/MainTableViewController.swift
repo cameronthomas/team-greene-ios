@@ -22,52 +22,49 @@ class MainTableViewController: UITableViewController {
         
         // Video list segue
         if (segue.identifier == "VideoTableViewControllerSegue") {
+            
             let videoTableVC:VideoTableViewController = segue.destination as! VideoTableViewController
-            let urlString = URL(string: "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4")
+            let url = URL(string: "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4") 
             
             // Download video metadata
-            if let url = urlString {
-                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    if error != nil {
-                        print(error)
-                    } else {
-                        if let usableData = data {
-                            let json = try? JSONSerialization.jsonObject(with: usableData)
-                            
-                            if let videoList = json as? [Any] {
-                                //  print("Array")
+            let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
+                if error != nil {
+                    print(error ?? "Problem with error in creating URL for video metadata")
+                } else {
+                    if let usableData = data {
+                        let json = try? JSONSerialization.jsonObject(with: usableData)
+                        if let videoList = json as? [Any] {
+                            for videoObject in videoList {
+                                var tempDictionary = [String: String]()
                                 
-                                for videoObject in videoList {
-                                    var tempDictionary = [String: String]()
-                                    
-                                    if let videoElements = videoObject as? [String: Any] {
-                                        // print(videoElements["name"]!)
-                                        tempDictionary["name"] = videoElements["name"]! as? String
-                                        
-                                        if let assets = videoElements["assets"]! as? [Any] {
-                                            if let videoDictionary = assets[1] as? [String: Any] {
-                                                // print(videoDictionary["url"]!)
-                                                tempDictionary["url"] = videoDictionary["url"]! as? String
-                                                self.videoData.append(tempDictionary)
-                                            }
+                                if let videoElements = videoObject as? [String: Any] {
+                                    tempDictionary["name"] = videoElements["name"]! as? String
+                                    tempDictionary["hashed_id"] = videoElements["hashed_id"]! as? String
+                    
+                                    if let assets = videoElements["assets"]! as? [Any] {
+                                        if let videoDictionary = assets[1] as? [String: Any] {
+                                            tempDictionary["url"] = videoDictionary["url"]! as? String
+                                            self.videoData.append(tempDictionary)
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                    
-                    // Reload video list table with download metadata
-                    DispatchQueue.main.async {
-                        videoTableVC.VIDEO_COUNT = self.videoData.count
-                        videoTableVC.videoData = self.videoData
-                        videoTableVC.tableView.reloadData()
-                        videoTableVC.viewDidLoad()
-                    }
                 }
                 
-                task.resume()
+                // Reload video list table with download metadata
+                DispatchQueue.main.async {
+                    videoTableVC.VIDEO_COUNT = self.videoData.count
+                    videoTableVC.videoData = self.videoData
+                    videoTableVC.tableView.reloadData()
+                    videoTableVC.viewDidLoad()
+                    self.videoData = []
+                }
             }
+            
+            task.resume()
+
         }
     }
     

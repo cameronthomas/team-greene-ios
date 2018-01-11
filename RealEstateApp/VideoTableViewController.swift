@@ -31,6 +31,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         }
     }
     
+    func loadDataInView() {
+        
+        
+        
+    }
+    
     func createActivityIndicator() {
         activityIndicator.transform = CGAffineTransform(scaleX: 3.75, y: 3.75)
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
@@ -38,6 +44,59 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         activityIndicator.hidesWhenStopped = true
         self.view.addSubview(activityIndicator)
     }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoTableViewCell
+        
+        if !videoData.isEmpty {
+            cell.delegate = self
+            cell.cellNumber = indexPath.section
+            cell.videoLabel.text = String(videoData[indexPath.section]["hashed_id"]!)
+        }
+        
+        return cell
+    }
+    
+    func playVideo(cellNumber: Int) {
+        if !videoData.isEmpty {
+            let videoURL = URL(string: videoData[cellNumber]["url"]!)
+            let player = AVPlayer(url: videoURL!)
+            let playerViewController = AVPlayerViewController()
+            playerViewController.player = player
+            
+            self.present(playerViewController, animated: true) {
+                playerViewController.player!.play()
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,37 +116,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // print(indexPath.section)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoTableViewCell
-        
-//        print(indexPath.section)
-//        if !videoData.isEmpty {
-            cell.delegate = self
-            cell.cellNumber = indexPath.section
-        //            cell.videoLabel.text = String(videoData[indexPath.section]["name"]!)
-//        }
-        
-        return cell
-    }
     
-    func playVideo(cellNumber: Int) {
-        print(cellNumber)
-        if !videoData.isEmpty {
-            let videoURL = URL(string: videoData[cellNumber]["url"]!)
-            
-            //let temp = "http://embed.wistia.com/deliveries/ed792aefeff85f66a68bca6e0050eb83d212e4a4.bin"
-            //  let videoURL = URL(string: temp)
-            
-            let player = AVPlayer(url: videoURL!)
-            let playerViewController = AVPlayerViewController()
-            playerViewController.player = player
-            
-            self.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
-            }
-        }
-    }
 
     
     
