@@ -15,9 +15,17 @@ protocol playVideoDelegate: NSObjectProtocol {
 
 class VideoTableViewCell: UITableViewCell
 {
-    
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var videoLabel: UILabel!
+    @IBOutlet weak var downloadDeleteButton: UIButton!
+    @IBAction func downloadDeleteButtonAction(_ sender: UIButton) {
+        if sender.titleLabel?.text == "Download" {
+            sender.setTitle("Delete Download", for: .normal)
+        } else {
+            sender.setTitle("Download", for: .normal)
+        }
+    }
+    
     
     var cellNumber = -1
     

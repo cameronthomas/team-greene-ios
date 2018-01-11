@@ -95,9 +95,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Kb-7r-oAx">
-                                            <rect key="frame" x="234" y="6" width="81" height="30"/>
+                                            <rect key="frame" x="216" y="6" width="118" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Download"/>
+                                            <state key="normal" title="Download/Delete"/>
+                                            <connections>
+                                                <action selector="downloadDeleteButtonAction:" destination="Dq6-ly-nAK" eventType="touchUpInside" id="aXZ-dy-ai2"/>
+                                            </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CMh-TH-I9w">
                                             <rect key="frame" x="26" y="10" width="121" height="21"/>
@@ -110,6 +113,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="cellContentView" destination="Jz9-NS-y8T" id="Z96-Tt-okL"/>
+                                    <outlet property="downloadDeleteButton" destination="8Kb-7r-oAx" id="W4j-NA-6fV"/>
                                     <outlet property="videoLabel" destination="CMh-TH-I9w" id="lHy-gW-W6q"/>
                                 </connections>
                             </tableViewCell>

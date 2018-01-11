@@ -130,9 +130,9 @@
 			children = (
 				311AEC1A1F0597B1001408F6 /* AppDelegate.swift */,
 				31DB4B79200585E20028D3EF /* MainTableViewController.swift */,
+				316DA8FD1FA842D300FDF842 /* VideoTableViewController.swift */,
 				315D349A1F16BB160084197C /* FeedbackController.swift */,
 				31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */,
-				316DA8FD1FA842D300FDF842 /* VideoTableViewController.swift */,
 				311AEC1E1F0597B1001408F6 /* Main.storyboard */,
 				311AEC241F0597B1001408F6 /* Assets.xcassets */,
 				311AEC261F0597B1001408F6 /* LaunchScreen.storyboard */,

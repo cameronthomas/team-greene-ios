@@ -11,6 +11,7 @@ import AVKit
 
 class VideoTableViewController: UITableViewController, playVideoDelegate  {    
     var videoData: [Dictionary<String, String>] = []
+    var videoDataRecieved:Data? = nil
     var activityIndicator = UIActivityIndicatorView()
     var VIDEO_COUNT = 0
     
@@ -22,19 +23,47 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        if videoData.isEmpty {
-            createActivityIndicator()
-            activityIndicator.startAnimating()
-        }
-        else {
-            activityIndicator.stopAnimating()
-        }
+        createActivityIndicator()
+        activityIndicator.startAnimating()
+        
+//        if videoData.isEmpty {
+//            createActivityIndicator()
+//            activityIndicator.startAnimating()
+//        }
+//        else {
+//            activityIndicator.stopAnimating()
+//        }
     }
     
     func loadDataInView() {
+        if let usableData = videoDataRecieved {
+            let json = try? JSONSerialization.jsonObject(with: usableData)
+            if let videoList = json as? [Any] {
+                for videoObject in videoList {
+                    var tempDictionary = [String: String]()
+                    
+                    if let videoElements = videoObject as? [String: Any] {
+                        tempDictionary["name"] = videoElements["name"]! as? String
+                        tempDictionary["hashed_id"] = videoElements["hashed_id"]! as? String
+                        tempDictionary["isDownloaded"] = "false"
+                        tempDictionary["localURL"] = "none"
+                        
+                        if let assets = videoElements["assets"]! as? [Any] {
+                            if let videoDictionary = assets[1] as? [String: Any] {
+                                tempDictionary["url"] = videoDictionary["url"]! as? String
+                                self.videoData.append(tempDictionary)
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
+        print(videoData)
         
-        
+        VIDEO_COUNT = videoData.count
+        activityIndicator.stopAnimating()
+        tableView.reloadData()
     }
     
     func createActivityIndicator() {
@@ -53,6 +82,8 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             cell.delegate = self
             cell.cellNumber = indexPath.section
             cell.videoLabel.text = String(videoData[indexPath.section]["hashed_id"]!)
+            var downloadDeleteButtonText = (videoData[indexPath.section]["isDownloaded"]! == "true") ? "Delete Download" : "Download"
+            cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
         }
         
         return cell
