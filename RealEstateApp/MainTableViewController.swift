@@ -10,8 +10,67 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     
-    let numberOfItemsInTable = 3
-
+    let numberOfItemsInTable = 2
+    var videoData: [Dictionary<String, String>] = []
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        
+        // Video list segue
+        if (segue.identifier == "VideoTableViewControllerSegue") {
+            let videoTableVC:VideoTableViewController = segue.destination as! VideoTableViewController
+            let urlString = URL(string: "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4")
+            
+            // Download video metadata
+            if let url = urlString {
+                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if error != nil {
+                        print(error)
+                    } else {
+                        if let usableData = data {
+                            let json = try? JSONSerialization.jsonObject(with: usableData)
+                            
+                            if let videoList = json as? [Any] {
+                                //  print("Array")
+                                
+                                for videoObject in videoList {
+                                    var tempDictionary = [String: String]()
+                                    
+                                    if let videoElements = videoObject as? [String: Any] {
+                                        // print(videoElements["name"]!)
+                                        tempDictionary["name"] = videoElements["name"]! as? String
+                                        
+                                        if let assets = videoElements["assets"]! as? [Any] {
+                                            if let videoDictionary = assets[1] as? [String: Any] {
+                                                // print(videoDictionary["url"]!)
+                                                tempDictionary["url"] = videoDictionary["url"]! as? String
+                                                self.videoData.append(tempDictionary)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Reload video list table with download metadata
+                    DispatchQueue.main.async {
+                        videoTableVC.VIDEO_COUNT = self.videoData.count
+                        videoTableVC.videoData = self.videoData
+                        videoTableVC.tableView.reloadData()
+                        videoTableVC.viewDidLoad()
+                    }
+                }
+                
+                task.resume()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +80,7 @@ class MainTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -84,16 +143,5 @@ class MainTableViewController: UITableViewController {
     }
     */
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    
-        if (segue.identifier == "VideoTableViewControllerSegue") {
-            let videoTableVC:VideoTableViewController = segue.destination as! VideoTableViewController
-            videoTableVC.recievedData = "received from seque"
-        }
-    }
+   
 }

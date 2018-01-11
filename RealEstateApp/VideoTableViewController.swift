@@ -11,10 +11,8 @@ import AVKit
 
 class VideoTableViewController: UITableViewController, playVideoDelegate  {    
     var videoData: [Dictionary<String, String>] = []
-    var recievedData:String!
-    
-    // NEED TO CHANGE THIS
-    let VIDEO_COUNT = 3
+    var activityIndicator = UIActivityIndicatorView()
+    var VIDEO_COUNT = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,56 +22,21 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        // Modified from example at
-        // https://code.bradymower.com/swift-3-apis-network-requests-json-getting-the-data-4aaae8a5efc0
-       let urlString = URL(string: "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4")
-
-        if let url = urlString {
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                if error != nil {
-                    print(error)
-                } else {
-                    if let usableData = data {
-                        let json = try? JSONSerialization.jsonObject(with: usableData)
-
-                        if let videoList = json as? [Any] {
-                            //  print("Array")
-
-                            for videoObject in videoList {
-                                var tempDictionary = [String: String]()
-
-                                if let videoElements = videoObject as? [String: Any] {
-                                    // print(videoElements["name"]!)
-                                    tempDictionary["name"] = videoElements["name"]! as? String
-
-                                    if let assets = videoElements["assets"]! as? [Any] {
-                                        if let videoDictionary = assets[1] as? [String: Any] {
-                                            // print(videoDictionary["url"]!)
-                                            tempDictionary["url"] = videoDictionary["url"]! as? String
-                                            self.videoData.append(tempDictionary)
-                                        }
-
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
-
-                for temp in self.videoData {
-                    print(temp["name"]!)
-                    print((temp["url"]!.description))
-                    print()
-                }
-
-            }
-            task.resume()
+        if videoData.isEmpty {
+            createActivityIndicator()
+            activityIndicator.startAnimating()
         }
-        
-//        DispatchQueue.main.async {
-//            self.tableView.reloadData()
-//        }
+        else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    func createActivityIndicator() {
+        activityIndicator.transform = CGAffineTransform(scaleX: 3.75, y: 3.75)
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(activityIndicator)
     }
 
     override func didReceiveMemoryWarning() {
@@ -86,6 +49,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return VIDEO_COUNT
+
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

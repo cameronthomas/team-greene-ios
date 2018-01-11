@@ -15,7 +15,6 @@
 		311AEC281F0597B1001408F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311AEC261F0597B1001408F6 /* LaunchScreen.storyboard */; };
 		311AEC331F0597B2001408F6 /* RealEstateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC321F0597B2001408F6 /* RealEstateAppTests.swift */; };
 		311AEC3E1F0597B2001408F6 /* RealEstateAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC3D1F0597B2001408F6 /* RealEstateAppUITests.swift */; };
-		312007731F188A64007587E5 /* PartnerContactInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 312007721F188A64007587E5 /* PartnerContactInfoController.swift */; };
 		3138AC1A1F27D38000E5DB39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */; };
 		3138AC1B1F27D38000E5DB39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */; };
 		3138AC1C1F27D38000E5DB39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */; };
@@ -58,7 +57,6 @@
 		311AEC391F0597B2001408F6 /* RealEstateAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealEstateAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		311AEC3D1F0597B2001408F6 /* RealEstateAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealEstateAppUITests.swift; sourceTree = "<group>"; };
 		311AEC3F1F0597B2001408F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		312007721F188A64007587E5 /* PartnerContactInfoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PartnerContactInfoController.swift; sourceTree = "<group>"; };
 		3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		315D349A1F16BB160084197C /* FeedbackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
 		316DA8FD1FA842D300FDF842 /* VideoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 				311AEC1A1F0597B1001408F6 /* AppDelegate.swift */,
 				31DB4B79200585E20028D3EF /* MainTableViewController.swift */,
 				315D349A1F16BB160084197C /* FeedbackController.swift */,
-				312007721F188A64007587E5 /* PartnerContactInfoController.swift */,
 				31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */,
 				316DA8FD1FA842D300FDF842 /* VideoTableViewController.swift */,
 				311AEC1E1F0597B1001408F6 /* Main.storyboard */,
@@ -403,7 +400,6 @@
 				311AEC231F0597B1001408F6 /* RealEstateApp.xcdatamodeld in Sources */,
 				31DB4B7A200585E20028D3EF /* MainTableViewController.swift in Sources */,
 				31190DC61FB9567000992AA0 /* VideoTableViewCell.swift in Sources */,
-				312007731F188A64007587E5 /* PartnerContactInfoController.swift in Sources */,
 				316DA8FE1FA842D300FDF842 /* VideoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
