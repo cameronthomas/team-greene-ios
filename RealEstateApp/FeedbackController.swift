@@ -15,7 +15,7 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var positiveFeedback: UITextView!
     @IBOutlet weak var improvementFeedback: UITextView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentSize.height = 1000

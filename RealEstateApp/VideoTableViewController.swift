@@ -32,7 +32,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
 //        }
 //        else {
 //            activityIndicator.stopAnimating()
-//        }
+//        }=
     }
     
     func loadDataInView() {
@@ -102,31 +102,32 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func videoDownloadCode() {
+        
+        let fileManager = FileManager.default
+        let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                        .userDomainMask, true)[0] as NSString).appendingPathComponent("vid.mp4")
+        
+        let urlString = "http://embed.wistia.com/deliveries/7f262905ddc81d95c62e025cc9a0d653251c1fc8.bin"
+        let url = URL(string: urlString)
+        let video = NSData(contentsOf: url!)
+        
+        fileManager.createFile(atPath: path as String, contents: video as! Data, attributes: nil)
+        
+        print("this is the path:", path)
+        
+        
+        
+        let videoURL = URL(fileURLWithPath: path)
+        let player = AVPlayer(url: videoURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+        
+    }
     
 
     override func didReceiveMemoryWarning() {
