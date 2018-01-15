@@ -10,10 +10,25 @@ import UIKit
 import AVKit
 
 class VideoTableViewController: UITableViewController, playVideoDelegate  {    
-    var videoData: [Dictionary<String, String>] = []
+  //  var videoData: [Dictionary<String, String>] = []
     var videoDataRecieved:Data? = nil
     var activityIndicator = UIActivityIndicatorView()
     var VIDEO_COUNT = 0
+    
+    let filePath =  try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data.plist")
+    
+
+    
+    var videoData: [Dictionary<String, String>] {
+    
+        get {
+            return NSKeyedUnarchiver.unarchiveObject(withFile: filePath.path) as? [Dictionary<String, String>] ?? []
+        }
+        set {
+            NSKeyedArchiver.archiveRootObject(newValue, toFile: filePath.path)
+        }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +47,13 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
 //        }
 //        else {
 //            activityIndicator.stopAnimating()
-//        }=
+//        }
     }
     
     func loadDataInView() {
+        
+        videoData = []
+        
         if let usableData = videoDataRecieved {
             let json = try? JSONSerialization.jsonObject(with: usableData)
             if let videoList = json as? [Any] {
@@ -45,7 +63,14 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
                     if let videoElements = videoObject as? [String: Any] {
                         tempDictionary["name"] = videoElements["name"]! as? String
                         tempDictionary["hashed_id"] = videoElements["hashed_id"]! as? String
+                        
+                        // Check to see if hash id exists as a file
+                            // If it does exist then set isDownload to true and set local URL to value
+                        
+                            // if it does not exist then set isDownloaded to false and set local URL to "none"
                         tempDictionary["isDownloaded"] = "false"
+                        
+                        
                         tempDictionary["localURL"] = "none"
                         
                         if let assets = videoElements["assets"]! as? [Any] {
@@ -91,6 +116,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     
     func playVideo(cellNumber: Int) {
         if !videoData.isEmpty {
+            
+            // Check to see if video is downloaded
+                // If video is downloaded then set to local URL
+            
+                // If video is not dowloaded then set to remote URL
+            
             let videoURL = URL(string: videoData[cellNumber]["url"]!)
             let player = AVPlayer(url: videoURL!)
             let playerViewController = AVPlayerViewController()
