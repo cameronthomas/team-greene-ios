@@ -29,7 +29,7 @@ class VideoTableViewCell: UITableViewCell
     @IBAction func downloadDeleteButtonAction(_ sender: UIButton) {
         
         let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                        .userDomainMask, true)[0] as NSString).appendingPathComponent(self.hashedId + ".mp4")
+                                                        .userDomainMask, true)[0] as NSString)
         if sender.titleLabel?.text == "Download" {
             
             // Disable button
@@ -48,8 +48,7 @@ class VideoTableViewCell: UITableViewCell
                     print(error ?? "Problem with error in creating URL for video metadata")
                 } else {
                     
-                    
-                    self.fileManager.createFile(atPath: path as String, contents: data, attributes: nil)
+                    self.fileManager.createFile(atPath: path.appendingPathComponent(self.hashedId + ".mp4"), contents: data, attributes: nil)
                     
                     let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
                     
@@ -65,10 +64,10 @@ class VideoTableViewCell: UITableViewCell
                     }
                     
                     
-                    self.videoSingleton.videoData[self.cellNumber]["localURL"] = path
+                    self.videoSingleton.videoData[self.cellNumber]["localURL"] = self.hashedId + ".mp4"
                     self.videoSingleton.videoData[self.cellNumber]["isDownloaded"] = "true"
     
-                    VideoDataSingleton.sharedInstance.videoData[self.cellNumber]["localURL"] = path
+                    VideoDataSingleton.sharedInstance.videoData[self.cellNumber]["localURL"] = self.hashedId + ".mp4"
                     VideoDataSingleton.sharedInstance.videoData[self.cellNumber]["isDownloaded"] = "true"
                     
                     
@@ -102,7 +101,7 @@ class VideoTableViewCell: UITableViewCell
             
             // Delete from docs
             do {
-                try fileManager.removeItem(atPath: path)
+                try fileManager.removeItem(atPath: path.appendingPathComponent(self.hashedId + ".mp4"))
                 
                 let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
                 do {

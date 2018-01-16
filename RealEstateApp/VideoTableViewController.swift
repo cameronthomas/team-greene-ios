@@ -14,6 +14,8 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     var videoDataRecieved:Data? = nil
     var activityIndicator = UIActivityIndicatorView()
     var VIDEO_COUNT = 0
+    let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                    .userDomainMask, true)[0] as NSString)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +74,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
                 // If video is not dowloaded then set to remote URL
 
             if videoSingleton.videoData[cellNumber]["isDownloaded"]! == "true" {
-                videoURL = URL(fileURLWithPath: videoSingleton.videoData[cellNumber]["localURL"]!)
+                videoURL = URL(fileURLWithPath: path.appendingPathComponent( videoSingleton.videoData[cellNumber]["localURL"]!))
                 print(videoURL)
                 
             } else {
