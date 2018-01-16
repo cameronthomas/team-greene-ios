@@ -30,7 +30,7 @@ class VideoTableViewCell: UITableViewCell
         
         let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                         .userDomainMask, true)[0] as NSString)
-        if sender.titleLabel?.text == "Download" {
+        if sender.titleLabel?.text == Strings.sharedInstance.downloadbuttonText {
             
             // Disable button
             DispatchQueue.main.async {
@@ -41,14 +41,14 @@ class VideoTableViewCell: UITableViewCell
             // TODO
             
             // Download video async
-            let urlString = URL(string: videoSingleton.videoData[self.cellNumber]["url"]!)
+            let urlString = URL(string: videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.urlKey]!)
             
             let task = URLSession.shared.dataTask(with: urlString!) { (data, response, error) in
                 if error != nil {
                     print(error ?? "Problem with error in creating URL for video metadata")
                 } else {
                     
-                    self.fileManager.createFile(atPath: path.appendingPathComponent(self.hashedId + ".mp4"), contents: data, attributes: nil)
+                    self.fileManager.createFile(atPath: path.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType), contents: data, attributes: nil)
                     
                     let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
                     
@@ -64,11 +64,11 @@ class VideoTableViewCell: UITableViewCell
                     }
                     
                     
-                    self.videoSingleton.videoData[self.cellNumber]["localURL"] = self.hashedId + ".mp4"
-                    self.videoSingleton.videoData[self.cellNumber]["isDownloaded"] = "true"
+                    self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
+                    self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.trueValue
     
-                    VideoDataSingleton.sharedInstance.videoData[self.cellNumber]["localURL"] = self.hashedId + ".mp4"
-                    VideoDataSingleton.sharedInstance.videoData[self.cellNumber]["isDownloaded"] = "true"
+                    VideoDataSingleton.sharedInstance.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
+                    VideoDataSingleton.sharedInstance.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.trueValue
                     
                     
                     // Add video to documents
@@ -77,7 +77,7 @@ class VideoTableViewCell: UITableViewCell
                         // MIGHT NOT NEED BELOW
                         // Update UI
                         // Change button title
-                        sender.setTitle("Delete Download", for: .normal)
+                        sender.setTitle(Strings.sharedInstance.deletebuttonText, for: .normal)
                         
                         // Enable button
                         self.downloadDeleteButton.isEnabled = true
@@ -96,12 +96,12 @@ class VideoTableViewCell: UITableViewCell
             // Display spinner to right of button
             
             // Update Video data list (NEED TO ACCESS VideoTableViewController)
-            self.videoSingleton.videoData[self.cellNumber]["localURL"] = ""
-            self.videoSingleton.videoData[self.cellNumber]["isDownloaded"] = "false"
+            self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
+            self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
             
             // Delete from docs
             do {
-                try fileManager.removeItem(atPath: path.appendingPathComponent(self.hashedId + ".mp4"))
+                try fileManager.removeItem(atPath: path.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType))
                 
                 let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
                 do {
@@ -128,7 +128,7 @@ class VideoTableViewCell: UITableViewCell
             // MIGHT NOT NEED BELOW
             // Update UI
             // Change button title
-            sender.setTitle("Download", for: .normal)
+            sender.setTitle(Strings.sharedInstance.downloadbuttonText, for: .normal)
             
             // Enable button
             self.downloadDeleteButton.isEnabled = true

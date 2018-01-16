@@ -11,8 +11,6 @@ import UIKit
 class MainTableViewController: UITableViewController {
     
     let numberOfItemsInTable = 2
-    //var videoData = []
-    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -21,10 +19,10 @@ class MainTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         // Video list segue
-        if (segue.identifier == "VideoTableViewControllerSegue") {
+        if (segue.identifier == Strings.sharedInstance.VideoTableVCSegueIdentifier) {
             
             let videoTableVC:VideoTableViewController = segue.destination as! VideoTableViewController
-            let url = URL(string: "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4") 
+            let url = URL(string: Strings.sharedInstance.wistiaApiUrl)
             
             // Download video metadata
             let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in

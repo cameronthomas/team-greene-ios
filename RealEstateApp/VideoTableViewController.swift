@@ -46,16 +46,16 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Strings.sharedInstance.VideoCellIdentifier, for: indexPath) as! VideoTableViewCell
         
         if !videoSingleton.videoData.isEmpty {
             cell.delegate = self
             cell.cellNumber = indexPath.section
-            cell.videoLabel.text = String(videoSingleton.videoData[indexPath.section]["name"]!)
-            cell.hashedId = String(videoSingleton.videoData[indexPath.section]["hashed_id"]!)
-            print(videoSingleton.videoData[indexPath.section]["isDownloaded"]!)
-            print(videoSingleton.videoData[indexPath.section]["localURL"]!)
-            var downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section]["isDownloaded"]! == "true") ? "Delete Download" : "Download"
+            cell.videoLabel.text = String(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.nameKey]!)
+            cell.hashedId = String(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.hashedIdKey]!)
+            print(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]!)
+            print(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.localUrlKey]!)
+            var downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue) ? Strings.sharedInstance.deletebuttonText : Strings.sharedInstance.downloadbuttonText
             cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
         }
         
@@ -73,12 +73,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             
                 // If video is not dowloaded then set to remote URL
 
-            if videoSingleton.videoData[cellNumber]["isDownloaded"]! == "true" {
-                videoURL = URL(fileURLWithPath: path.appendingPathComponent( videoSingleton.videoData[cellNumber]["localURL"]!))
+            if videoSingleton.videoData[cellNumber][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue {
+                videoURL = URL(fileURLWithPath: path.appendingPathComponent(videoSingleton.videoData[cellNumber][Strings.sharedInstance.localUrlKey]!))
                 print(videoURL)
                 
             } else {
-                videoURL = URL(string: videoSingleton.videoData[cellNumber]["url"]!)
+                videoURL = URL(string: videoSingleton.videoData[cellNumber][Strings.sharedInstance.urlKey]!)
             }
             
             player = AVPlayer(url: videoURL!)

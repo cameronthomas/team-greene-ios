@@ -19,6 +19,7 @@
 		3138AC1B1F27D38000E5DB39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */; };
 		3138AC1C1F27D38000E5DB39 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */; };
 		31424210200D58E2009EB2F7 /* VideoDataSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142420F200D58E2009EB2F7 /* VideoDataSingleton.swift */; };
+		31424212200DAECA009EB2F7 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31424211200DAECA009EB2F7 /* Strings.swift */; };
 		315D349B1F16BB160084197C /* FeedbackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315D349A1F16BB160084197C /* FeedbackController.swift */; };
 		316DA8FE1FA842D300FDF842 /* VideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316DA8FD1FA842D300FDF842 /* VideoTableViewController.swift */; };
 		317AE11C1F79799900D8C593 /* VideoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317AE11B1F79799900D8C593 /* VideoPageViewController.swift */; };
@@ -60,6 +61,7 @@
 		311AEC3F1F0597B2001408F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3142420F200D58E2009EB2F7 /* VideoDataSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDataSingleton.swift; sourceTree = "<group>"; };
+		31424211200DAECA009EB2F7 /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		315D349A1F16BB160084197C /* FeedbackController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackController.swift; sourceTree = "<group>"; };
 		316DA8FD1FA842D300FDF842 /* VideoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewController.swift; sourceTree = "<group>"; };
 		317AE11B1F79799900D8C593 /* VideoPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPageViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				316DA8FD1FA842D300FDF842 /* VideoTableViewController.swift */,
 				315D349A1F16BB160084197C /* FeedbackController.swift */,
 				31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */,
+				31424211200DAECA009EB2F7 /* Strings.swift */,
 				3142420F200D58E2009EB2F7 /* VideoDataSingleton.swift */,
 				311AEC1E1F0597B1001408F6 /* Main.storyboard */,
 				311AEC241F0597B1001408F6 /* Assets.xcassets */,
@@ -404,6 +407,7 @@
 				311AEC231F0597B1001408F6 /* RealEstateApp.xcdatamodeld in Sources */,
 				31DB4B7A200585E20028D3EF /* MainTableViewController.swift in Sources */,
 				31190DC61FB9567000992AA0 /* VideoTableViewCell.swift in Sources */,
+				31424212200DAECA009EB2F7 /* Strings.swift in Sources */,
 				316DA8FE1FA842D300FDF842 /* VideoTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

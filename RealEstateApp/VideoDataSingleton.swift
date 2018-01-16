@@ -12,7 +12,7 @@ class VideoDataSingleton {
     static let sharedInstance = VideoDataSingleton()
     var videoDataRecieved:Data? = nil
     
-    let filePath =  try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data.plist")
+    let filePath =  try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(Strings.sharedInstance.videoDataFilename)
     
     var videoData: [Dictionary<String, String>] {
         
@@ -34,21 +34,21 @@ class VideoDataSingleton {
                         var tempDictionary = [String: String]()
                         
                         if let videoElements = videoObject as? [String: Any] {
-                            tempDictionary["name"] = videoElements["name"]! as? String
-                            tempDictionary["hashed_id"] = videoElements["hashed_id"]! as? String
+                            tempDictionary[Strings.sharedInstance.nameKey] = videoElements[Strings.sharedInstance.nameKey]! as? String
+                            tempDictionary[Strings.sharedInstance.hashedIdKey] = videoElements[Strings.sharedInstance.hashedIdKey]! as? String
                             
                             // Check to see if hash id exists as a file
                             // If it does exist then set isDownload to true and set local URL to value
                             
                             // if it does not exist then set isDownloaded to false and set local URL to "none"
-                            tempDictionary["isDownloaded"] = "false"
+                            tempDictionary[Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
                             
                             
-                            tempDictionary["localURL"] = "none"
+                            tempDictionary[Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
                             
-                            if let assets = videoElements["assets"]! as? [Any] {
+                            if let assets = videoElements[Strings.sharedInstance.apiAssetsKey]! as? [Any] {
                                 if let videoDictionary = assets[1] as? [String: Any] {
-                                    tempDictionary["url"] = videoDictionary["url"]! as? String
+                                    tempDictionary[Strings.sharedInstance.urlKey] = videoDictionary[Strings.sharedInstance.apiUrlKey]! as? String
                                     self.videoData.append(tempDictionary)
                                 }
                             }
