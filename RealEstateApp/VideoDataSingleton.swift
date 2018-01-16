@@ -10,6 +10,7 @@ import Foundation
 
 class VideoDataSingleton {
     static let sharedInstance = VideoDataSingleton()
+    private init() { }
     var videoDataRecieved:Data? = nil
     
     let filePath =  try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(Strings.sharedInstance.videoDataFilename)

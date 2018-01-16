@@ -10,6 +10,7 @@ import Foundation
 
 class Strings {
     static let sharedInstance = Strings()
+    private init() { }
     
     let wistiaApiUrl = "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4"
     
