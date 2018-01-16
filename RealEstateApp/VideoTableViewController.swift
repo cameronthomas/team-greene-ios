@@ -10,25 +10,10 @@ import UIKit
 import AVKit
 
 class VideoTableViewController: UITableViewController, playVideoDelegate  {    
-  //  var videoData: [Dictionary<String, String>] = []
+    var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
     var videoDataRecieved:Data? = nil
     var activityIndicator = UIActivityIndicatorView()
     var VIDEO_COUNT = 0
-    
-    let filePath =  try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("data.plist")
-    
-
-    
-    var videoData: [Dictionary<String, String>] {
-    
-        get {
-            return NSKeyedUnarchiver.unarchiveObject(withFile: filePath.path) as? [Dictionary<String, String>] ?? []
-        }
-        set {
-            NSKeyedArchiver.archiveRootObject(newValue, toFile: filePath.path)
-        }
-    }
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,53 +25,11 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         
         createActivityIndicator()
         activityIndicator.startAnimating()
-        
-//        if videoData.isEmpty {
-//            createActivityIndicator()
-//            activityIndicator.startAnimating()
-//        }
-//        else {
-//            activityIndicator.stopAnimating()
-//        }
     }
     
     func loadDataInView() {
-        
-        videoData = []
-        
-        if let usableData = videoDataRecieved {
-            let json = try? JSONSerialization.jsonObject(with: usableData)
-            if let videoList = json as? [Any] {
-                for videoObject in videoList {
-                    var tempDictionary = [String: String]()
-                    
-                    if let videoElements = videoObject as? [String: Any] {
-                        tempDictionary["name"] = videoElements["name"]! as? String
-                        tempDictionary["hashed_id"] = videoElements["hashed_id"]! as? String
-                        
-                        // Check to see if hash id exists as a file
-                            // If it does exist then set isDownload to true and set local URL to value
-                        
-                            // if it does not exist then set isDownloaded to false and set local URL to "none"
-                        tempDictionary["isDownloaded"] = "false"
-                        
-                        
-                        tempDictionary["localURL"] = "none"
-                        
-                        if let assets = videoElements["assets"]! as? [Any] {
-                            if let videoDictionary = assets[1] as? [String: Any] {
-                                tempDictionary["url"] = videoDictionary["url"]! as? String
-                                self.videoData.append(tempDictionary)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        print(videoData)
-        
-        VIDEO_COUNT = videoData.count
+      //  videoSingleton = VideoDataSingleton.sharedInstance
+        VIDEO_COUNT = videoSingleton.videoData.count
         activityIndicator.stopAnimating()
         tableView.reloadData()
     }
@@ -103,11 +46,14 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "videoCell", for: indexPath) as! VideoTableViewCell
         
-        if !videoData.isEmpty {
+        if !videoSingleton.videoData.isEmpty {
             cell.delegate = self
             cell.cellNumber = indexPath.section
-            cell.videoLabel.text = String(videoData[indexPath.section]["hashed_id"]!)
-            var downloadDeleteButtonText = (videoData[indexPath.section]["isDownloaded"]! == "true") ? "Delete Download" : "Download"
+            cell.videoLabel.text = String(videoSingleton.videoData[indexPath.section]["name"]!)
+            cell.hashedId = String(videoSingleton.videoData[indexPath.section]["hashed_id"]!)
+            print(videoSingleton.videoData[indexPath.section]["isDownloaded"]!)
+            print(videoSingleton.videoData[indexPath.section]["localURL"]!)
+            var downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section]["isDownloaded"]! == "true") ? "Delete Download" : "Download"
             cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
         }
         
@@ -115,15 +61,25 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     func playVideo(cellNumber: Int) {
-        if !videoData.isEmpty {
+        var videoURL:URL?
+        var player:AVPlayer
+        
+        if !videoSingleton.videoData.isEmpty {
             
             // Check to see if video is downloaded
                 // If video is downloaded then set to local URL
             
                 // If video is not dowloaded then set to remote URL
+
+            if videoSingleton.videoData[cellNumber]["isDownloaded"]! == "true" {
+                videoURL = URL(fileURLWithPath: videoSingleton.videoData[cellNumber]["localURL"]!)
+                print(videoURL)
+                
+            } else {
+                videoURL = URL(string: videoSingleton.videoData[cellNumber]["url"]!)
+            }
             
-            let videoURL = URL(string: videoData[cellNumber]["url"]!)
-            let player = AVPlayer(url: videoURL!)
+            player = AVPlayer(url: videoURL!)
             let playerViewController = AVPlayerViewController()
             playerViewController.player = player
             
@@ -138,6 +94,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         let fileManager = FileManager.default
         let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                         .userDomainMask, true)[0] as NSString).appendingPathComponent("vid.mp4")
+       
         
         let urlString = "http://embed.wistia.com/deliveries/7f262905ddc81d95c62e025cc9a0d653251c1fc8.bin"
         let url = URL(string: urlString)

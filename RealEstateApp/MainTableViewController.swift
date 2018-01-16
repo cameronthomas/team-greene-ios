@@ -31,31 +31,13 @@ class MainTableViewController: UITableViewController {
                 if error != nil {
                     print(error ?? "Problem with error in creating URL for video metadata")
                 } else {
-//                    if let usableData = data {
-//                        let json = try? JSONSerialization.jsonObject(with: usableData)
-//                        if let videoList = json as? [Any] {
-//                            for videoObject in videoList {
-//                                var tempDictionary = [String: String]()
-//                                
-//                                if let videoElements = videoObject as? [String: Any] {
-//                                    tempDictionary["name"] = videoElements["name"]! as? String
-//                                    tempDictionary["hashed_id"] = videoElements["hashed_id"]! as? String
-//                    
-//                                    if let assets = videoElements["assets"]! as? [Any] {
-//                                        if let videoDictionary = assets[1] as? [String: Any] {
-//                                            tempDictionary["url"] = videoDictionary["url"]! as? String
-//                                            self.videoData.append(tempDictionary)
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
                     
-                    // Reload video list table with download metadata
+                    VideoDataSingleton.sharedInstance.videoDataRecieved = data
+                    VideoDataSingleton.sharedInstance.processData()
+                    
                     DispatchQueue.main.async {
-                        videoTableVC.videoDataRecieved = data
                         videoTableVC.loadDataInView()
+                        
                     }
                 }
             }
