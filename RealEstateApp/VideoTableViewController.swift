@@ -27,6 +27,20 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         
         createActivityIndicator()
         activityIndicator.startAnimating()
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+
+        self.refreshControl?.bounds = CGRect(x: 0, y: 10, width: (self.refreshControl?.bounds.size.width)!, height: (self.refreshControl?.bounds.size.height)!) // Change position of refresh view
+        
+        // this is the replacement of implementing: "collectionView.addSubview(refreshControl)"
+      //  self.view.addSubview(refreshControl)
+    }
+    
+    func refreshData(refreshControl: UIRefreshControl) {
+        print("refreshed")
+        tableView.reloadData()
+        refreshControl.endRefreshing()
     }
     
     func loadDataInView() {
@@ -34,6 +48,8 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         VIDEO_COUNT = videoSingleton.videoData.count
         activityIndicator.stopAnimating()
         tableView.reloadData()
+        
+        print(videoSingleton.videoData)
     }
     
     func createActivityIndicator() {
@@ -57,7 +73,30 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             print(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.localUrlKey]!)
             var downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue) ? Strings.sharedInstance.deletebuttonText : Strings.sharedInstance.downloadbuttonText
             cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
+            
+           // view.isUserInteractionEnabled = on
+           // view.alpha = on ? 1 : 0.5
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatterGet.timeZone = TimeZone.current
+            
+            let activeDate: Date? = dateFormatterGet.date(from: videoSingleton.videoData[indexPath.section][Strings.sharedInstance.activeDateKey]!)
+            let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
+            
+            if (activeDate! >= Date() || expirationDate! <= Date()) {
+                cell.isUserInteractionEnabled = false
+                cell.videoLabel.alpha = 0.2
+                cell.downloadDeleteButton.alpha = 0.2
+            }
+            else {
+                cell.isUserInteractionEnabled = true
+                cell.videoLabel.alpha = 1
+                cell.downloadDeleteButton.alpha = 1
+            }
         }
+        
+        print("inside cell function")
+    
         
         return cell
     }
@@ -67,12 +106,6 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         var player:AVPlayer
         
         if !videoSingleton.videoData.isEmpty {
-            
-            // Check to see if video is downloaded
-                // If video is downloaded then set to local URL
-            
-                // If video is not dowloaded then set to remote URL
-
             if videoSingleton.videoData[cellNumber][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue {
                 videoURL = URL(fileURLWithPath: path.appendingPathComponent(videoSingleton.videoData[cellNumber][Strings.sharedInstance.localUrlKey]!))
                 print(videoURL)
@@ -91,35 +124,6 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         }
     }
     
-    func videoDownloadCode() {
-        
-        let fileManager = FileManager.default
-        let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                        .userDomainMask, true)[0] as NSString).appendingPathComponent("vid.mp4")
-       
-        
-        let urlString = "http://embed.wistia.com/deliveries/7f262905ddc81d95c62e025cc9a0d653251c1fc8.bin"
-        let url = URL(string: urlString)
-        let video = NSData(contentsOf: url!)
-        
-        fileManager.createFile(atPath: path as String, contents: video as! Data, attributes: nil)
-        
-        print("this is the path:", path)
-        
-        
-        
-        let videoURL = URL(fileURLWithPath: path)
-        let player = AVPlayer(url: videoURL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        
-        self.present(playerViewController, animated: true) {
-            playerViewController.player!.play()
-        }
-        
-    }
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -142,6 +146,57 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
 
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func videoDownloadCode() {
+        
+//        let fileManager = FileManager.default
+//        let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
+//                                                        .userDomainMask, true)[0] as NSString).appendingPathComponent("vid.mp4")
+//
+//
+//        let urlString = "http://embed.wistia.com/deliveries/7f262905ddc81d95c62e025cc9a0d653251c1fc8.bin"
+//        let url = URL(string: urlString)
+//        let video = NSData(contentsOf: url!)
+//
+//        fileManager.createFile(atPath: path as String, contents: video as! Data, attributes: nil)
+//
+//        print("this is the path:", path)
+//
+//
+//
+//        let videoURL = URL(fileURLWithPath: path)
+//        let player = AVPlayer(url: videoURL)
+//        let playerViewController = AVPlayerViewController()
+//        playerViewController.player = player
+//
+//        self.present(playerViewController, animated: true) {
+//            playerViewController.player!.play()
+//        }
+        
+    }
     
     
     

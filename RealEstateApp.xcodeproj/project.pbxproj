@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3100B686200EA53000B191B7 /* ActiveDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100B685200EA53000B191B7 /* ActiveDates.swift */; };
 		31190DC61FB9567000992AA0 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */; };
 		311AEC1B1F0597B1001408F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC1A1F0597B1001408F6 /* AppDelegate.swift */; };
 		311AEC201F0597B1001408F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311AEC1E1F0597B1001408F6 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3100B685200EA53000B191B7 /* ActiveDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveDates.swift; sourceTree = "<group>"; };
 		31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
 		311AEC171F0597B1001408F6 /* RealEstateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		311AEC1A1F0597B1001408F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */,
 				31424211200DAECA009EB2F7 /* Strings.swift */,
 				3142420F200D58E2009EB2F7 /* VideoDataSingleton.swift */,
+				3100B685200EA53000B191B7 /* ActiveDates.swift */,
 				311AEC1E1F0597B1001408F6 /* Main.storyboard */,
 				311AEC241F0597B1001408F6 /* Assets.xcassets */,
 				311AEC261F0597B1001408F6 /* LaunchScreen.storyboard */,
@@ -406,6 +409,7 @@
 				31424210200D58E2009EB2F7 /* VideoDataSingleton.swift in Sources */,
 				311AEC231F0597B1001408F6 /* RealEstateApp.xcdatamodeld in Sources */,
 				31DB4B7A200585E20028D3EF /* MainTableViewController.swift in Sources */,
+				3100B686200EA53000B191B7 /* ActiveDates.swift in Sources */,
 				31190DC61FB9567000992AA0 /* VideoTableViewCell.swift in Sources */,
 				31424212200DAECA009EB2F7 /* Strings.swift in Sources */,
 				316DA8FE1FA842D300FDF842 /* VideoTableViewController.swift in Sources */,

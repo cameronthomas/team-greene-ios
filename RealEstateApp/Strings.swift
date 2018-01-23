@@ -36,8 +36,14 @@ class Strings {
     let apiAssetsKey = "assets"
     let apiUrlKey = "url"
     
+    let activeDateKey = "activeDate"
+    
     let VideoTableVCSegueIdentifier = "VideoTableViewControllerSegue"
     let VideoCellIdentifier = "videoCell"
     
     let videoFileType = "mp4"
+    
+    let videoActiveDates =  ["2018-01-22 21:55:00", "2018-01-22 22:55:00", "2018-01-22 23:58:00"]
+    
+    let courseExpirationDate = "2018-01-23 01:25:00"
 }

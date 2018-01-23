@@ -53,6 +53,16 @@ class MainTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.timeZone = TimeZone.current
+        
+        let stringFromDataBase = "2018-01-22 21:55:00"
+        let date1: Date? = dateFormatterGet.date(from: stringFromDataBase)
+
+        print(date1! < Date())
+        
     }
     
     override func didReceiveMemoryWarning() {

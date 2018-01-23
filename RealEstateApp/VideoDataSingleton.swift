@@ -31,7 +31,7 @@ class VideoDataSingleton {
             if let usableData = videoDataRecieved {
                 let json = try? JSONSerialization.jsonObject(with: usableData)
                 if let videoList = json as? [Any] {
-                    for videoObject in videoList {
+                    for (index, videoObject) in videoList.enumerated() {
                         var tempDictionary = [String: String]()
                         
                         if let videoElements = videoObject as? [String: Any] {
@@ -43,9 +43,10 @@ class VideoDataSingleton {
                             
                             // if it does not exist then set isDownloaded to false and set local URL to "none"
                             tempDictionary[Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
-                            
-                            
                             tempDictionary[Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
+
+                            // Replace line below with array returned from google sheet
+                            tempDictionary[Strings.sharedInstance.activeDateKey] = Strings.sharedInstance.videoActiveDates[index]
                             
                             if let assets = videoElements[Strings.sharedInstance.apiAssetsKey]! as? [Any] {
                                 if let videoDictionary = assets[1] as? [String: Any] {

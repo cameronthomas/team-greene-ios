@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealEstateApp/VideoTableViewController.swift"
-            timestampString = "537769722.146403"
+            timestampString = "538385240.6594501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "playVideo(cellNumber:)"
             landmarkType = "7">
          </BreakpointContent>
