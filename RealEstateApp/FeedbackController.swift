@@ -10,28 +10,45 @@ import UIKit
 import Foundation
 import MessageUI
 
-class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate {
+class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate, UITextViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var positiveFeedback: UITextView!
     @IBOutlet weak var improvementFeedback: UITextView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollView.contentSize.height = 1000
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.touchedScreen(gesture:)))
+        // Make keyboard disapear when tap outside of textbox
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
         
+        // Add "Done" button to keyboard to make it disapear
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.dismissKeyboard))
+        toolbar.setItems([doneButton], animated: false)
+        positiveFeedback.inputAccessoryView = toolbar
+        improvementFeedback.inputAccessoryView = toolbar
         //self.scrollView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0)
+      //  scrollView.isScrollEnabled = false
     }
     
-    // Dismiss keyboard when outside of text boxes in tappedd
-    func touchedScreen(gesture: UITapGestureRecognizer) {
-        positiveFeedback.resignFirstResponder()
-        improvementFeedback.resignFirstResponder()
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("text field pressed")
+        scrollView.setContentOffset(CGPoint(x: 0, y: 270), animated: true)
+       // scrollView.isScrollEnabled = true
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+      //  scrollView.isScrollEnabled = false
+    }
+
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     // Followed example at https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/
     // for sending emails
