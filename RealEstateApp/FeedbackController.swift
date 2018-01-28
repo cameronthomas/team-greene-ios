@@ -32,7 +32,7 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         positiveFeedback.inputAccessoryView = toolbar
         improvementFeedback.inputAccessoryView = toolbar
         //self.scrollView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0)
-      //  scrollView.isScrollEnabled = false
+       // scrollView.isScrollEnabled = true
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

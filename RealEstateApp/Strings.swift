@@ -43,7 +43,7 @@ class Strings {
     
     let videoFileType = "mp4"
     
-    let videoActiveDates =  ["2018-01-22 21:55:00", "2018-01-22 22:55:00", "2018-01-22 23:58:00"]
+    let videoActiveDates =  ["2018-01-25 21:55:00", "2018-01-26 22:55:00", "2018-01-28 23:58:00"]
     
-    let courseExpirationDate = "2018-01-23 01:25:00"
+    let courseExpirationDate = "2018-01-29 01:25:00"
 }

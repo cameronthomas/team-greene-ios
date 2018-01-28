@@ -22,7 +22,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.re
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         createActivityIndicator()
@@ -35,6 +35,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         
         // this is the replacement of implementing: "collectionView.addSubview(refreshControl)"
       //  self.view.addSubview(refreshControl)
+        
     }
     
     func refreshData(refreshControl: UIRefreshControl) {
@@ -123,6 +124,36 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             }
         }
     }
+    
+    func displayExpireError() {
+        let alert = UIAlertController(title: "Error", message: "The course has ended and all videos have expired.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func videosExpiredHandler() {
+        displayExpireError()
+
+        // Loop through each cell
+        // Call deleteVideo()
+        // Update data structure
+        // Reload List
+        
+        
+//        deleteVideo()
+//
+//        // Update Video data list (NEED TO ACCESS VideoTableViewController)
+//        self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
+//        self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
+//
+//        // Disable button
+//        self.downloadDeleteButton.isEnabled = false
+//
+//        delegate?.loadDataInView()
+        
+    }
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

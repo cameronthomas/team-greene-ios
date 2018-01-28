@@ -140,53 +140,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7o-0k-KdY">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7o-0k-KdY">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TRj-Kf-40h">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TRj-Kf-40h">
                                         <rect key="frame" x="52" y="63" width="255" height="171"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azq-y5-Gmo">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azq-y5-Gmo">
                                         <rect key="frame" x="127" y="527" width="120" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Submit Feedback"/>
                                         <connections>
                                             <action selector="sendFeedbackEmail:" destination="g3H-wj-26N" eventType="touchUpInside" id="aDA-cw-999"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dSP-D3-OX4">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dSP-D3-OX4">
                                         <rect key="frame" x="52" y="331" width="255" height="171"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="171" id="Ab9-rQ-mac"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         <connections>
                                             <outlet property="delegate" destination="g3H-wj-26N" id="h1k-h4-Lfe"/>
                                         </connections>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What do you like about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7b-9w-J5o">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you like about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7b-9w-J5o">
                                         <rect key="frame" x="44" y="20" width="270" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What could we improve about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pF-e2-GC2">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What could we improve about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pF-e2-GC2">
                                         <rect key="frame" x="26" y="291" width="322" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="5pF-e2-GC2" firstAttribute="centerX" secondItem="Azq-y5-Gmo" secondAttribute="centerX" id="7oa-VT-5ug"/>
+                                    <constraint firstItem="o7b-9w-J5o" firstAttribute="leading" secondItem="p7o-0k-KdY" secondAttribute="leading" constant="44" id="AD3-zB-ebL"/>
+                                    <constraint firstItem="5pF-e2-GC2" firstAttribute="centerX" secondItem="p7o-0k-KdY" secondAttribute="centerX" id="IFV-x5-K6X"/>
+                                    <constraint firstItem="dSP-D3-OX4" firstAttribute="top" secondItem="5pF-e2-GC2" secondAttribute="bottom" constant="19" id="KBz-ft-InO"/>
+                                    <constraint firstItem="Azq-y5-Gmo" firstAttribute="top" secondItem="dSP-D3-OX4" secondAttribute="bottom" constant="25" id="Prr-79-PzQ"/>
+                                    <constraint firstItem="5pF-e2-GC2" firstAttribute="top" secondItem="TRj-Kf-40h" secondAttribute="bottom" constant="57" id="RfY-9l-5hv"/>
+                                    <constraint firstAttribute="bottom" secondItem="Azq-y5-Gmo" secondAttribute="bottom" constant="46" id="Y4Q-OK-Bjj"/>
+                                    <constraint firstItem="o7b-9w-J5o" firstAttribute="centerX" secondItem="TRj-Kf-40h" secondAttribute="centerX" id="c1S-ze-t4j"/>
+                                    <constraint firstItem="5pF-e2-GC2" firstAttribute="centerY" secondItem="p7o-0k-KdY" secondAttribute="centerY" id="cWz-hT-1kR"/>
+                                    <constraint firstItem="TRj-Kf-40h" firstAttribute="trailing" secondItem="dSP-D3-OX4" secondAttribute="trailing" id="eAy-dC-4jJ"/>
+                                    <constraint firstAttribute="trailing" secondItem="5pF-e2-GC2" secondAttribute="trailing" constant="27" id="jnj-mo-qoB"/>
+                                    <constraint firstItem="TRj-Kf-40h" firstAttribute="leading" secondItem="p7o-0k-KdY" secondAttribute="leading" constant="52" id="kIQ-8c-0yj"/>
+                                    <constraint firstItem="TRj-Kf-40h" firstAttribute="top" secondItem="o7b-9w-J5o" secondAttribute="bottom" constant="22" id="ong-Ca-hEs"/>
+                                    <constraint firstItem="o7b-9w-J5o" firstAttribute="top" secondItem="p7o-0k-KdY" secondAttribute="top" constant="20" id="uMn-6v-i1z"/>
+                                    <constraint firstItem="TRj-Kf-40h" firstAttribute="leading" secondItem="dSP-D3-OX4" secondAttribute="leading" id="v26-nE-VKL"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="p7o-0k-KdY" secondAttribute="trailing" id="QOK-Fg-a5q"/>
+                            <constraint firstItem="p7o-0k-KdY" firstAttribute="top" secondItem="ffC-9p-Foz" secondAttribute="bottom" id="X0y-J2-J4d"/>
+                            <constraint firstItem="p7o-0k-KdY" firstAttribute="bottom" secondItem="4mK-qa-5V0" secondAttribute="top" id="ivK-ID-Zh8"/>
+                            <constraint firstItem="p7o-0k-KdY" firstAttribute="leading" secondItem="wOS-Cm-GtF" secondAttribute="leading" id="vfU-2e-KDz"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Give Feedback" id="jLW-pK-Wr5"/>
                     <connections>

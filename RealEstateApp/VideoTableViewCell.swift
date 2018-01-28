@@ -11,6 +11,8 @@ import AVKit
 
 protocol playVideoDelegate: NSObjectProtocol {
     func playVideo(cellNumber: Int)
+    func videosExpiredHandler()
+    func loadDataInView()
 }
 
 class VideoTableViewCell: UITableViewCell
@@ -99,7 +101,7 @@ class VideoTableViewCell: UITableViewCell
             self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
             self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
             
-            // Delete from docs
+            // Delete from documents
             do {
                 try fileManager.removeItem(atPath: path.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType))
                 
@@ -145,7 +147,28 @@ class VideoTableViewCell: UITableViewCell
     }
     
     func deleteVideo() {
-        
+        let documentsPath = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                        .userDomainMask, true)[0] as NSString)
+        // Delete from documents
+        do {
+            try fileManager.removeItem(atPath: documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType))
+            
+            let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            do {
+                
+                let fileURLs = try self.fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+                
+                print("Docs directory after remove:")
+                print(fileURLs)
+                print()
+                // process files
+            } catch {
+                print("Error while enumerating files \(documentsURL): \(error.localizedDescription)")
+            }
+        }
+        catch {
+            print("Could not clear temp folder: \(error)")
+        }
     }
     
     func createActivityIndicator() {
@@ -161,8 +184,21 @@ class VideoTableViewCell: UITableViewCell
         super.setSelected(selected, animated: animated)
         
         if selected {
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatterGet.timeZone = TimeZone.current
+            let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
+            
             if delegate != nil {
-                delegate?.playVideo(cellNumber: cellNumber)
+                
+                // Videos have not expired
+                if expirationDate! > Date() {
+                    // delegate?.playVideo(cellNumber: cellNumber)
+                }
+                // Vieos have expired
+                else {
+                }
+                delegate?.videosExpiredHandler()
             }
         }
     }
