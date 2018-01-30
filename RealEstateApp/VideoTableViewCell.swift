@@ -11,8 +11,7 @@ import AVKit
 
 protocol playVideoDelegate: NSObjectProtocol {
     func playVideo(cellNumber: Int)
-    func videosExpiredHandler()
-    func loadDataInView()
+    func displayExpireError()
 }
 
 class VideoTableViewCell: UITableViewCell
@@ -89,7 +88,6 @@ class VideoTableViewCell: UITableViewCell
                 }
             }
             task.resume()
-            print("after")
         } else {
 
             // Disable button
@@ -171,15 +169,6 @@ class VideoTableViewCell: UITableViewCell
         }
     }
     
-    func createActivityIndicator() {
-     //   activityIndicator.transform = CGAffineTransform(scaleX: 3.75, y: 3.75)
-        activityIndicator.contentMode = .scaleAspectFit
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-//        activityIndicator.center = self.accessoryView?.center
-        activityIndicator.hidesWhenStopped = true
-        self.accessoryView = activityIndicator as UIView
-    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -197,8 +186,9 @@ class VideoTableViewCell: UITableViewCell
                 }
                 // Vieos have expired
                 else {
+//                     delegate?.displayExpireError()
                 }
-                delegate?.videosExpiredHandler()
+                 delegate?.displayExpireError()
             }
         }
     }

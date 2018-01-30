@@ -98,7 +98,6 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         
         print("inside cell function")
     
-        
         return cell
     }
     
@@ -127,30 +126,38 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     
     func displayExpireError() {
         let alert = UIAlertController(title: "Error", message: "The course has ended and all videos have expired.", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: videosExpiredHandler))
         self.present(alert, animated: true, completion: nil)
     }
     
-    func videosExpiredHandler() {
-        displayExpireError()
-
-        // Loop through each cell
-        // Call deleteVideo()
-        // Update data structure
-        // Reload List
+    func videosExpiredHandler(alert: UIAlertAction!) {
+        print("videosExpiredHandler")
+        
+        for cell in tableView.visibleCells {
+            let cellObject = cell as! VideoTableViewCell
+            cellObject.deleteVideo()
+            videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
+            videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
+            changeCellUsability(cell: cellObject, enableCell: false)
+        }
         
         
-//        deleteVideo()
-//
-//        // Update Video data list (NEED TO ACCESS VideoTableViewController)
-//        self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
-//        self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
-//
-//        // Disable button
-//        self.downloadDeleteButton.isEnabled = false
-//
-//        delegate?.loadDataInView()
+        // Working on disabling cells
         
+        tableView.reloadData()
+    }
+    
+    func changeCellUsability(cell: VideoTableViewCell, enableCell: Bool) {
+        if (enableCell) {
+            cell.isUserInteractionEnabled = true
+            cell.videoLabel.alpha = 1
+            cell.downloadDeleteButton.alpha = 1
+        }
+        else {
+            cell.isUserInteractionEnabled = false
+            cell.videoLabel.alpha = 0.2
+            cell.downloadDeleteButton.alpha = 0.2
+        }
     }
     
 
