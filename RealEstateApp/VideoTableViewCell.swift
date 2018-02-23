@@ -182,13 +182,13 @@ class VideoTableViewCell: UITableViewCell
                 
                 // Videos have not expired
                 if expirationDate! > Date() {
-                    // delegate?.playVideo(cellNumber: cellNumber)
+                    delegate?.playVideo(cellNumber: cellNumber)
                 }
                 // Vieos have expired
                 else {
 //                     delegate?.displayExpireError()
                 }
-                 delegate?.displayExpireError()
+                 //delegate?.displayExpireError()
             }
         }
     }

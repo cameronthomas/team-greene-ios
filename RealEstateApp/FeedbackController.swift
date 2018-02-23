@@ -12,13 +12,13 @@ import MessageUI
 
 class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate, UITextViewDelegate {
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var positiveFeedback: UITextView!
-    @IBOutlet weak var improvementFeedback: UITextView!
+   // @IBOutlet weak var scrollView: UIScrollView!
+    //@IBOutlet weak var positiveFeedback: UITextView!
+   // @IBOutlet weak var improvementFeedback: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize.height = 1000
+    //    scrollView.contentSize.height = 1000
         
         // Make keyboard disapear when tap outside of textbox
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -29,22 +29,22 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         toolbar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.dismissKeyboard))
         toolbar.setItems([doneButton], animated: false)
-        positiveFeedback.inputAccessoryView = toolbar
-        improvementFeedback.inputAccessoryView = toolbar
-        //self.scrollView.contentInset = UIEdgeInsetsMake(200, 0, 0, 0)
-       // scrollView.isScrollEnabled = true
+     //   positiveFeedback.inputAccessoryView = toolbar
+     //   improvementFeedback.inputAccessoryView = toolbar
+        
+      //  let barHeight = self.navigationController?.navigationBar.frame.height ?? 0
+        
+       // print("barHeight:", barHeight)
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        print("text field pressed")
-        scrollView.setContentOffset(CGPoint(x: 0, y: 270), animated: true)
-       // scrollView.isScrollEnabled = true
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-      //  scrollView.isScrollEnabled = false
-    }
+//    func textViewDidBeginEditing(_ textView: UITextView) {
+//        print("text field pressed")
+//        scrollView.setContentOffset(CGPoint(x: 0, y: 270), animated: true)
+//    }
+//    
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+//    }
 
     func dismissKeyboard() {
         view.endEditing(true)
@@ -54,31 +54,31 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
     // for sending emails
     
     // Create and open mail view controller
-    @IBAction func sendFeedbackEmail(_ sender: UIButton) {
-        
-        // Return if both fields are blank
-        guard positiveFeedback.text != "" || improvementFeedback.text != "" else {
-            return
-        }
-        
-        let mailViewController = MFMailComposeViewController()
-        mailViewController.mailComposeDelegate = self
-        
-        createEmail(mailViewController)
-        
-        if MFMailComposeViewController.canSendMail() {
-            self.present(mailViewController, animated: true, completion: nil)
-        } else {
-            print("cannot send mail")
-        }
-    }
+//    @IBAction func sendFeedbackEmail(_ sender: UIButton) {
+//
+//        // Return if both fields are blank
+////        guard positiveFeedback.text != "" || improvementFeedback.text != "" else {
+////            return
+////        }
+//
+//        let mailViewController = MFMailComposeViewController()
+//        mailViewController.mailComposeDelegate = self
+//
+//        createEmail(mailViewController)
+//        
+//        if MFMailComposeViewController.canSendMail() {
+//            self.present(mailViewController, animated: true, completion: nil)
+//        } else {
+//            print("cannot send mail")
+//        }
+//    }
     
     // MARK: MFMailComposeViewControllerDelegate Method
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
         
-        positiveFeedback.text = ""
-        improvementFeedback.text = ""
+      //  positiveFeedback.text = ""
+      //  improvementFeedback.text = ""
     }
     
     // Create email with feedback
@@ -88,13 +88,13 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         mailViewController.setToRecipients(["cct2491@gmail.com", "cameroncthomas1@gmail.com"])
         
         // Build HTML for email body
-        if (positiveFeedback.text != "") {
-            emailBody = "<span style=\"font-weight: bold\">Positive Feedback</span><br/>" + positiveFeedback.text! + "<br/><br/>"
-        }
+//        if (positiveFeedback.text != "") {
+//            emailBody = "<span style=\"font-weight: bold\">Positive Feedback</span><br/>" + positiveFeedback.text! + "<br/><br/>"
+//        }
         
-        if (improvementFeedback.text != "") {
-            emailBody += "<span style=\"font-weight: bold\">Improvement Feedback</span><br/>" + improvementFeedback.text!
-        }
+//        if (improvementFeedback.text != "") {
+//            emailBody += "<span style=\"font-weight: bold\">Improvement Feedback</span><br/>" + improvementFeedback.text!
+//        }
         
         mailViewController.setSubject("Master Class Feedback")
         mailViewController.setMessageBody(emailBody, isHTML: true)

@@ -61,7 +61,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="g3H-wj-26N" kind="show" identifier="HomeScreenToGiveFeedback" id="fRl-Me-Mjd"/>
+                                            <segue destination="eks-FM-ozo" kind="show" id="gAT-8o-yZl"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -77,6 +77,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYm-Zi-sDQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1957.5999999999999" y="8.5457271364317844"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="6Ct-QY-SCj">
+            <objects>
+                <viewController id="eks-FM-ozo" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Ey-jF-l7w"/>
+                        <viewControllerLayoutGuide type="bottom" id="KUu-y6-ECE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YGQ-OW-dfu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="836"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Id-h7-zTP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="836"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZD-49-PPp">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="936"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Positive Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rR-g4-8Rf">
+                                                <rect key="frame" x="100" y="8" width="175" height="26.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="SC1-HL-Ly1">
+                                                <rect key="frame" x="67" y="51" width="240" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.66534133719999999" blue="0.64039077700000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="936" id="1CK-Q1-VvT"/>
+                                            <constraint firstItem="8rR-g4-8Rf" firstAttribute="left" secondItem="eZD-49-PPp" secondAttribute="left" constant="100" id="9o4-YA-ggo"/>
+                                            <constraint firstAttribute="trailing" secondItem="8rR-g4-8Rf" secondAttribute="trailing" constant="100" id="qWM-iY-4Jb"/>
+                                            <constraint firstItem="8rR-g4-8Rf" firstAttribute="top" secondItem="eZD-49-PPp" secondAttribute="top" constant="8" id="wPn-KJ-vvL"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.68005022339999999" green="1" blue="0.73081821499999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="eZD-49-PPp" secondAttribute="trailing" id="JKH-eQ-j7D"/>
+                                    <constraint firstItem="eZD-49-PPp" firstAttribute="leading" secondItem="6Id-h7-zTP" secondAttribute="leading" id="LXo-XY-HLm"/>
+                                    <constraint firstItem="eZD-49-PPp" firstAttribute="top" secondItem="6Id-h7-zTP" secondAttribute="top" id="THV-z0-GNX"/>
+                                    <constraint firstAttribute="bottom" secondItem="eZD-49-PPp" secondAttribute="bottom" id="Z7W-sW-VQh"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Id-h7-zTP" firstAttribute="top" secondItem="6Ey-jF-l7w" secondAttribute="bottom" id="AXK-th-X8c"/>
+                            <constraint firstItem="eZD-49-PPp" firstAttribute="width" secondItem="YGQ-OW-dfu" secondAttribute="width" id="CSr-wZ-rM1"/>
+                            <constraint firstAttribute="trailing" secondItem="6Id-h7-zTP" secondAttribute="trailing" id="P8f-c2-WRS"/>
+                            <constraint firstItem="6Id-h7-zTP" firstAttribute="leading" secondItem="YGQ-OW-dfu" secondAttribute="leading" id="iOb-hV-btC"/>
+                            <constraint firstItem="KUu-y6-ECE" firstAttribute="top" secondItem="6Id-h7-zTP" secondAttribute="bottom" id="ope-jx-Fcd"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <size key="freeformSize" width="375" height="900"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uFd-Lo-dfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3146" y="351"/>
         </scene>
         <!--Video Table View Controller-->
         <scene sceneID="1GW-Bn-yMP">
@@ -128,79 +194,6 @@
             </objects>
             <point key="canvasLocation" x="3060" y="-615.74212893553226"/>
         </scene>
-        <!--Give Feedback-->
-        <scene sceneID="cue-h1-Ffh">
-            <objects>
-                <viewController id="g3H-wj-26N" customClass="FeedbackController" customModule="RealEstateApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ffC-9p-Foz"/>
-                        <viewControllerLayoutGuide type="bottom" id="4mK-qa-5V0"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wOS-Cm-GtF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7o-0k-KdY">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TRj-Kf-40h">
-                                        <rect key="frame" x="52" y="63" width="255" height="171"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Azq-y5-Gmo">
-                                        <rect key="frame" x="127" y="527" width="120" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Submit Feedback"/>
-                                        <connections>
-                                            <action selector="sendFeedbackEmail:" destination="g3H-wj-26N" eventType="touchUpInside" id="aDA-cw-999"/>
-                                        </connections>
-                                    </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dSP-D3-OX4">
-                                        <rect key="frame" x="52" y="331" width="255" height="171"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="171" id="Ab9-rQ-mac"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="g3H-wj-26N" id="h1k-h4-Lfe"/>
-                                        </connections>
-                                    </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What do you like about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o7b-9w-J5o">
-                                        <rect key="frame" x="44" y="20" width="270" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What could we improve about the course?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pF-e2-GC2">
-                                        <rect key="frame" x="26" y="291" width="322" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Give Feedback" id="jLW-pK-Wr5"/>
-                    <connections>
-                        <outlet property="improvementFeedback" destination="dSP-D3-OX4" id="piC-QW-ZJR"/>
-                        <outlet property="positiveFeedback" destination="TRj-Kf-40h" id="YcL-OU-ted"/>
-                        <outlet property="scrollView" destination="p7o-0k-KdY" id="dMo-ic-7Du"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Y1V-DD-9WH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3309.5999999999999" y="276.61169415292358"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="fkB-0J-dMb">
             <objects>
@@ -218,9 +211,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vW4-WH-Rtd">
-                                <rect key="frame" x="109" y="477" width="156" height="30"/>
+                                <rect key="frame" x="168" y="477" width="38" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login with Infusionsoft"/>
+                                <state key="normal" title="Login"/>
                                 <connections>
                                     <segue destination="HTt-hm-p1B" kind="show" id="MBl-zV-BJR"/>
                                 </connections>
