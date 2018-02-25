@@ -78,23 +78,23 @@
             </objects>
             <point key="canvasLocation" x="1957.5999999999999" y="8.5457271364317844"/>
         </scene>
-        <!--View Controller-->
+        <!--Feedback Controller-->
         <scene sceneID="6Ct-QY-SCj">
             <objects>
-                <viewController id="eks-FM-ozo" sceneMemberID="viewController">
+                <viewController id="eks-FM-ozo" customClass="FeedbackController" customModule="RealEstateApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6Ey-jF-l7w"/>
                         <viewControllerLayoutGuide type="bottom" id="KUu-y6-ECE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YGQ-OW-dfu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Id-h7-zTP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="844"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZD-49-PPp">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="844"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Positive Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4La-dl-rK6">
                                                 <rect key="frame" x="100" y="77" width="175" height="27"/>
@@ -110,13 +110,10 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="eks-FM-ozo" id="bIp-4d-sLl"/>
+                                                </connections>
                                             </textView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Negative Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rD7-Mz-e3t">
-                                                <rect key="frame" x="89" y="272" width="196" height="27"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="W2e-bv-32o">
                                                 <rect key="frame" x="67" y="314" width="240" height="128"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -125,6 +122,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="eks-FM-ozo" id="FTc-NY-WCl"/>
+                                                </connections>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provide Feedback on Course" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1b-DK-RPN">
                                                 <rect key="frame" x="27" y="20" width="372" height="32"/>
@@ -136,14 +136,23 @@
                                                 <rect key="frame" x="111.5" y="477" width="152" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="Submit Feedback"/>
+                                                <connections>
+                                                    <action selector="sendFeedbackEmail:" destination="eks-FM-ozo" eventType="touchUpInside" id="z6N-c8-xQd"/>
+                                                </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Improvement Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rD7-Mz-e3t">
+                                                <rect key="frame" x="75" y="272" width="224" height="27"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="1" green="0.66534133719999999" blue="0.64039077700000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.098039215686274508" green="0.78431372549019607" blue="0.63137254901960782" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="672" id="1CK-Q1-VvT"/>
+                                            <constraint firstAttribute="height" constant="844" id="1CK-Q1-VvT"/>
                                             <constraint firstItem="W2e-bv-32o" firstAttribute="left" secondItem="Sn5-sz-Gyq" secondAttribute="left" id="1yY-5q-2Yz"/>
                                             <constraint firstItem="W2e-bv-32o" firstAttribute="top" secondItem="rD7-Mz-e3t" secondAttribute="bottom" constant="15" id="6n2-ZJ-DhK"/>
-                                            <constraint firstItem="rD7-Mz-e3t" firstAttribute="left" secondItem="4La-dl-rK6" secondAttribute="left" constant="-11" id="7Iy-Yw-sfW"/>
+                                            <constraint firstItem="rD7-Mz-e3t" firstAttribute="left" secondItem="4La-dl-rK6" secondAttribute="left" constant="-25" id="7Iy-Yw-sfW"/>
                                             <constraint firstItem="4La-dl-rK6" firstAttribute="top" secondItem="B1b-DK-RPN" secondAttribute="bottom" constant="25" id="Cu1-yH-jRI"/>
                                             <constraint firstAttribute="right" secondItem="B1b-DK-RPN" secondAttribute="right" constant="-24" id="DBn-01-CWX"/>
                                             <constraint firstItem="rD7-Mz-e3t" firstAttribute="top" secondItem="Sn5-sz-Gyq" secondAttribute="bottom" constant="25" id="EEx-5Q-CKb"/>
@@ -152,7 +161,7 @@
                                             <constraint firstAttribute="right" secondItem="4La-dl-rK6" secondAttribute="right" constant="100" id="Qid-dJ-574"/>
                                             <constraint firstItem="4La-dl-rK6" firstAttribute="left" secondItem="eZD-49-PPp" secondAttribute="left" constant="100" id="QvB-Et-dK8"/>
                                             <constraint firstItem="Sn5-sz-Gyq" firstAttribute="centerX" secondItem="4La-dl-rK6" secondAttribute="centerX" id="RI3-Xy-I1S"/>
-                                            <constraint firstItem="rD7-Mz-e3t" firstAttribute="right" secondItem="4La-dl-rK6" secondAttribute="right" constant="10" id="SFr-pH-os1"/>
+                                            <constraint firstItem="rD7-Mz-e3t" firstAttribute="right" secondItem="4La-dl-rK6" secondAttribute="right" constant="24" id="SFr-pH-os1"/>
                                             <constraint firstItem="XzR-HQ-fGP" firstAttribute="centerX" secondItem="W2e-bv-32o" secondAttribute="centerX" id="gqH-qy-twv"/>
                                             <constraint firstItem="Sn5-sz-Gyq" firstAttribute="top" secondItem="4La-dl-rK6" secondAttribute="bottom" constant="15" id="hXl-fb-9bs"/>
                                             <constraint firstItem="B1b-DK-RPN" firstAttribute="left" secondItem="eZD-49-PPp" secondAttribute="left" constant="27" id="s7l-9l-4fX"/>
@@ -161,7 +170,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.68005022339999999" green="1" blue="0.73081821499999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="eZD-49-PPp" secondAttribute="trailing" id="JKH-eQ-j7D"/>
                                     <constraint firstItem="eZD-49-PPp" firstAttribute="leading" secondItem="6Id-h7-zTP" secondAttribute="leading" id="LXo-XY-HLm"/>
@@ -180,7 +188,12 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <size key="freeformSize" width="375" height="736"/>
+                    <size key="freeformSize" width="375" height="908"/>
+                    <connections>
+                        <outlet property="improvementFeedbackTextView" destination="W2e-bv-32o" id="Ue7-SP-Y0k"/>
+                        <outlet property="positiveFeedbackTextView" destination="Sn5-sz-Gyq" id="cvR-rJ-asA"/>
+                        <outlet property="scrollView" destination="6Id-h7-zTP" id="ADc-WN-Ry9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uFd-Lo-dfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
