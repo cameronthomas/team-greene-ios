@@ -31,6 +31,7 @@ class Strings {
     let falseValue = "false"
     
     let downloadbuttonText = "Download"
+    let downloadingButtonText = "Downloading"
     let deletebuttonText = "Delete Download"
     
     let apiAssetsKey = "assets"
@@ -45,9 +46,8 @@ class Strings {
     
     let videoActiveDates =  ["2018-01-25 21:55:00", "2018-01-26 22:55:00", "2018-01-28 23:58:00"]
     
-    let courseExpirationDate = "2019-01-30 01:25:00"
+    let courseExpirationDate = "2018-02-28 14:59:00"
     
     let emailAddress1 = "cameroncthomas1@gmail.com"
     let emailAddress2 = "cct2491@gmail.com"
-    
 }

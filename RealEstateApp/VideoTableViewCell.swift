@@ -32,11 +32,10 @@ class VideoTableViewCell: UITableViewCell
         let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                         .userDomainMask, true)[0] as NSString)
         if sender.titleLabel?.text == Strings.sharedInstance.downloadbuttonText {
-            
+            print("Thread name:", Thread.current.description)
             // Disable button
-            DispatchQueue.main.async {
-                self.downloadDeleteButton.isEnabled = false
-            }
+            self.downloadDeleteButton.isEnabled = false
+            sender.setTitle(Strings.sharedInstance.downloadingButtonText, for: .normal)
             
             // Display spinner to right of button
             // TODO
@@ -70,7 +69,6 @@ class VideoTableViewCell: UITableViewCell
     
                     VideoDataSingleton.sharedInstance.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
                     VideoDataSingleton.sharedInstance.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.trueValue
-                    
                     
                     // Add video to documents
                     DispatchQueue.main.async {
@@ -184,11 +182,11 @@ class VideoTableViewCell: UITableViewCell
                 if expirationDate! > Date() {
                     delegate?.playVideo(cellNumber: cellNumber)
                 }
+                    
                 // Vieos have expired
                 else {
-//                     delegate?.displayExpireError()
+                    delegate?.displayExpireError()
                 }
-                 //delegate?.displayExpireError()
             }
         }
     }

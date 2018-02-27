@@ -9,7 +9,8 @@
 import UIKit
 import AVKit
 
-class VideoTableViewController: UITableViewController, playVideoDelegate  {    
+class VideoTableViewController: UITableViewController, playVideoDelegate  {
+    // Properties
     var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
     var videoDataRecieved:Data? = nil
     var activityIndicator = UIActivityIndicatorView()
@@ -17,8 +18,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                     .userDomainMask, true)[0] as NSString)
     
+    /**
+     View did load
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("view did load")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -38,21 +43,42 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         
     }
     
+    /**
+     Refresh data in table
+     */
     func refreshData(refreshControl: UIRefreshControl) {
         print("refreshed")
-        tableView.reloadData()
+        loadDataInView()
+       // tableView.reloadData()
+        
         refreshControl.endRefreshing()
     }
     
+    /**
+     Load data into table
+     */
     func loadDataInView() {
-      //  videoSingleton = VideoDataSingleton.sharedInstance
-        VIDEO_COUNT = videoSingleton.videoData.count
-        activityIndicator.stopAnimating()
-        tableView.reloadData()
+        print("loadDataInView")
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.timeZone = TimeZone.current
+        let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
         
-        print(videoSingleton.videoData)
+        if expirationDate! <= Date() {
+            displayExpireError()
+        } else {
+            VIDEO_COUNT = videoSingleton.videoData.count
+            tableView.reloadData()
+            if activityIndicator.isAnimating {
+                activityIndicator.stopAnimating()
+            }
+        }
+        print()
     }
     
+    /**
+     Create load indicator
+     */
     func createActivityIndicator() {
         activityIndicator.transform = CGAffineTransform(scaleX: 3.75, y: 3.75)
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
@@ -61,7 +87,9 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         self.view.addSubview(activityIndicator)
     }
     
-    
+    /**
+     Run for creation of each cell
+     */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Strings.sharedInstance.VideoCellIdentifier, for: indexPath) as! VideoTableViewCell
         
@@ -101,6 +129,9 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         return cell
     }
     
+    /**
+     Play videos
+     */
     func playVideo(cellNumber: Int) {
         var videoURL:URL?
         var player:AVPlayer
@@ -124,12 +155,18 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         }
     }
     
+    /**
+     Display error message when course has expired
+     */
     func displayExpireError() {
         let alert = UIAlertController(title: "Error", message: "The course has ended and all videos have expired.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: videosExpiredHandler))
         self.present(alert, animated: true, completion: nil)
     }
     
+    /**
+     Take necesary actions when course has expired
+     */
     func videosExpiredHandler(alert: UIAlertAction!) {
         print("videosExpiredHandler")
         
@@ -141,12 +178,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             changeCellUsability(cell: cellObject, enableCell: false)
         }
         
-        
-        // Working on disabling cells
-        
         tableView.reloadData()
     }
     
+    /**
+     Toggle whether cell is enabled
+     */
     func changeCellUsability(cell: VideoTableViewCell, enableCell: Bool) {
         if (enableCell) {
             cell.isUserInteractionEnabled = true
