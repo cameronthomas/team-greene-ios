@@ -23,35 +23,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
      */
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view did load")
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.re
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
         createActivityIndicator()
-        activityIndicator.startAnimating()
-        
-        self.refreshControl = UIRefreshControl()
-        self.refreshControl?.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-
-        self.refreshControl?.bounds = CGRect(x: 0, y: 10, width: (self.refreshControl?.bounds.size.width)!, height: (self.refreshControl?.bounds.size.height)!) // Change position of refresh view
-        
-        // this is the replacement of implementing: "collectionView.addSubview(refreshControl)"
-      //  self.view.addSubview(refreshControl)
-        
-    }
-    
-    /**
-     Refresh data in table
-     */
-    func refreshData(refreshControl: UIRefreshControl) {
-        print("refreshed")
-        loadDataInView()
-       // tableView.reloadData()
-        
-        refreshControl.endRefreshing()
     }
     
     /**
@@ -64,16 +36,13 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         dateFormatterGet.timeZone = TimeZone.current
         let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
         
+        VIDEO_COUNT = videoSingleton.videoData.count
+        
         if expirationDate! <= Date() {
             displayExpireError()
         } else {
-            VIDEO_COUNT = videoSingleton.videoData.count
             tableView.reloadData()
-            if activityIndicator.isAnimating {
-                activityIndicator.stopAnimating()
-            }
         }
-        print()
     }
     
     /**
@@ -85,6 +54,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
         self.view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
     
     /**
@@ -103,8 +73,6 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             var downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue) ? Strings.sharedInstance.deletebuttonText : Strings.sharedInstance.downloadbuttonText
             cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
             
-           // view.isUserInteractionEnabled = on
-           // view.alpha = on ? 1 : 0.5
             let dateFormatterGet = DateFormatter()
             dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
             dateFormatterGet.timeZone = TimeZone.current
@@ -113,19 +81,22 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
             
             if (activeDate! >= Date() || expirationDate! <= Date()) {
-                cell.isUserInteractionEnabled = false
-                cell.videoLabel.alpha = 0.2
-                cell.downloadDeleteButton.alpha = 0.2
+               changeCellUsability(cell: cell, enableCell: false)
             }
             else {
-                cell.isUserInteractionEnabled = true
-                cell.videoLabel.alpha = 1
-                cell.downloadDeleteButton.alpha = 1
+                changeCellUsability(cell: cell, enableCell: true)
             }
         }
         
         print("inside cell function")
-    
+
+        // If we are at the last element, then the list is done loading
+        // Stop activity indicator
+        if indexPath.section == videoSingleton.videoData.count - 1 {
+            print("list done loading")
+            activityIndicator.stopAnimating()
+        }
+        
         return cell
     }
     
@@ -172,10 +143,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         
         for cell in tableView.visibleCells {
             let cellObject = cell as! VideoTableViewCell
-            cellObject.deleteVideo()
+            if videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.isDownloadedKey] == Strings.sharedInstance.trueValue {
+                cellObject.deleteVideo()
+            }
+            
             videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
             videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
-            changeCellUsability(cell: cellObject, enableCell: false)
         }
         
         tableView.reloadData()
@@ -197,19 +170,9 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         }
     }
     
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return VIDEO_COUNT
-
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

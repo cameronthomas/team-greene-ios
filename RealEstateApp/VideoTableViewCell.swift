@@ -28,18 +28,25 @@ class VideoTableViewCell: UITableViewCell
     
     
     @IBAction func downloadDeleteButtonAction(_ sender: UIButton) {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.timeZone = TimeZone.current
+        let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
+        
+        // Don't allow download if course is expired
+        if expirationDate! <= Date() {
+            delegate?.displayExpireError()
+            return
+        }
         
         let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                         .userDomainMask, true)[0] as NSString)
         if sender.titleLabel?.text == Strings.sharedInstance.downloadbuttonText {
-            print("Thread name:", Thread.current.description)
+
             // Disable button
             self.downloadDeleteButton.isEnabled = false
             sender.setTitle(Strings.sharedInstance.downloadingButtonText, for: .normal)
-            
-            // Display spinner to right of button
-            // TODO
-            
+
             // Download video async
             let urlString = URL(string: videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.urlKey]!)
             
@@ -63,25 +70,18 @@ class VideoTableViewCell: UITableViewCell
                         print("Error while enumerating files \(documentsURL): \(error.localizedDescription)")
                     }
                     
-                    
                     self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
                     self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.trueValue
     
                     VideoDataSingleton.sharedInstance.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
                     VideoDataSingleton.sharedInstance.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.trueValue
                     
-                    // Add video to documents
                     DispatchQueue.main.async {
-                        // Refresh view
-                        // MIGHT NOT NEED BELOW
-                        // Update UI
                         // Change button title
                         sender.setTitle(Strings.sharedInstance.deletebuttonText, for: .normal)
                         
                         // Enable button
                         self.downloadDeleteButton.isEnabled = true
-                        // Turn off and get rid of spinner
-                        
                     }
                 }
             }
@@ -89,9 +89,7 @@ class VideoTableViewCell: UITableViewCell
         } else {
 
             // Disable button
-                self.downloadDeleteButton.isEnabled = false
-            
-            // Display spinner to right of button
+            self.downloadDeleteButton.isEnabled = false
             
             // Update Video data list (NEED TO ACCESS VideoTableViewController)
             self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
@@ -118,22 +116,11 @@ class VideoTableViewCell: UITableViewCell
                 print("Could not clear temp folder: \(error)")
             }
             
-            // Update UI
-            // Change button title
-            
-            // Enable button
-            // Add video to documents
-            // MIGHT NOT NEED BELOW
-            // Update UI
             // Change button title
             sender.setTitle(Strings.sharedInstance.downloadbuttonText, for: .normal)
             
             // Enable button
             self.downloadDeleteButton.isEnabled = true
-            // Turn off and get rid of spinner
-            
-            
-            // Turn off and get rid of spinner
         }
     }
     
@@ -145,26 +132,33 @@ class VideoTableViewCell: UITableViewCell
     func deleteVideo() {
         let documentsPath = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                         .userDomainMask, true)[0] as NSString)
+        
+        print(documentsPath.description)
         // Delete from documents
         do {
-            try fileManager.removeItem(atPath: documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType))
-            
-            let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            do {
-                
-                let fileURLs = try self.fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
-                
-                print("Docs directory after remove:")
-                print(fileURLs)
-                print()
-                // process files
-            } catch {
-                print("Error while enumerating files \(documentsURL): \(error.localizedDescription)")
-            }
+            try fileManager.removeItem(atPath: documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType + "4"))
         }
         catch {
-            print("Could not clear temp folder: \(error)")
+            print(error)
         }
+        
+        print()
+        print()
+        
+        
+//        let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//        do {
+//
+//            let fileURLs = try self.fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+//
+//            print("Docs directory after remove:")
+//            print(fileURLs)
+//            print()
+//            // process files
+//        } catch {
+//            print("Error while enumerating files \(documentsURL): \(error.localizedDescription)")
+//        }
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -177,7 +171,6 @@ class VideoTableViewCell: UITableViewCell
             let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
             
             if delegate != nil {
-                
                 // Videos have not expired
                 if expirationDate! > Date() {
                     delegate?.playVideo(cellNumber: cellNumber)

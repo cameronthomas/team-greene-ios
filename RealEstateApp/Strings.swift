@@ -46,7 +46,7 @@ class Strings {
     
     let videoActiveDates =  ["2018-01-25 21:55:00", "2018-01-26 22:55:00", "2018-01-28 23:58:00"]
     
-    let courseExpirationDate = "2018-02-28 14:59:00"
+    let courseExpirationDate = "2018-02-28 15:59:30"
     
     let emailAddress1 = "cameroncthomas1@gmail.com"
     let emailAddress2 = "cct2491@gmail.com"
