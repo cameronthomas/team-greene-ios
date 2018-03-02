@@ -87,18 +87,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
-    
-//    func application(_ app: UIApplication,
-//                     open url: URL,
-//                     options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
-//        // you should probably first check if this is the callback being opened
-//        // if <# check #> {
-//        // if your oauth2 instance lives somewhere else, adapt accordingly
-//        print(url.absoluteString)
-//        //  }
-//        return true
-//    }
-
 }
 

@@ -1,36 +1,15 @@
 PODS:
-  - AeroGearHttp (1.0.0)
-  - AeroGearOAuth2 (1.0.1):
-    - AeroGearHttp (= 1.0.0)
-  - Alamofire (4.5.0)
-  - AlamofireImage (3.2.0):
-    - Alamofire (~> 4.1)
-  - OAuthSwift (1.1.2)
-  - p2.OAuth2 (3.0.3)
-  - WistiaKit (0.30.1):
-    - AlamofireImage (~> 3.0)
-    - WistiaKitCore
-  - WistiaKitCore (0.30.1):
-    - Alamofire (~> 4.0)
+  - Alamofire (4.6.0)
+  - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
-  - AeroGearHttp
-  - AeroGearOAuth2
-  - OAuthSwift
-  - p2.OAuth2
-  - WistiaKit
-  - WistiaKitCore
+  - Alamofire (~> 4.6)
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
-  AeroGearHttp: 8c825d4563439f565196f52efe80e15f0055109a
-  AeroGearOAuth2: 24f2abbc3e25bd58c328080ec286816d9d2a9d0c
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
-  AlamofireImage: 157ed682cc81d3b9db4fb90c1f12180ac552d93b
-  OAuthSwift: 5aa5659984d3ca3206ba636a9e7a9c6626b2e8bd
-  p2.OAuth2: 63d8d3e366ac2c43bfe8bfa13b42cfeb908c314e
-  WistiaKit: 5b207e365b636c08c43fd3ba9fa7550792a68670
-  WistiaKitCore: 22c3caf5fcd52681ae06aaa81ec9a3fc1217a40f
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 110c8db1e94b8e47b7cf3aec83f50ef5188bfad6
+PODFILE CHECKSUM: 0d34d4e4458782bb48931b6d8e6f9eaf0f0b1dc0
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

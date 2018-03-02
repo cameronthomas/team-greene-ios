@@ -1,5 +1,7 @@
 //
-//  Use this file to import your target's public headers that you would like to expose to Swift.
+//  RealEstateApp-Bridging-Header.m
+//  RealEstateApp
 //
-
-//#import <Google/SignIn.h>
+//  Created by Cameron Thomas on 3/2/18.
+//  Copyright © 2018 Cameron Thomas. All rights reserved.
+//
