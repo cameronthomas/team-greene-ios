@@ -10,4 +10,5 @@ target 'RealEstateApp' do
     #    pod 'OAuthSwift'
     pod 'Alamofire', '~> 4.6'
     pod 'SwiftyJSON'
+    pod 'PromiseKit', '~> 6.0'
 end

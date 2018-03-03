@@ -10,30 +10,37 @@ import UIKit
 import Alamofire
 
 class MainTableViewController: UITableViewController {
-    
     let numberOfItemsInTable = 2
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        
         // Video list segue
         if (segue.identifier == Strings.sharedInstance.VideoTableVCSegueIdentifier) {
             if VideoDataSingleton.sharedInstance.videoData.isEmpty {
                 print("new data fetched")
                 
-                Alamofire.request(Strings.sharedInstance.wistiaApiUrl, method: .get).validate().responseJSON { response in
-                    VideoDataSingleton.sharedInstance.alamoFireAndSwiftyJson(result: response.result)
-                    DispatchQueue.main.async {
-                        (segue.destination as! VideoTableViewController).loadDataInView()
-                    }
+                Alamofire.request(Strings.sharedInstance.googleSheetApiUrl, method: .get).validate().responseJSON { response in
+                    print("Google alamo fire")
+                    Strings.sharedInstance.getCourseDates(result: response.result)
+                    self.getWistiaData(segue: segue)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    (segue.destination as! VideoTableViewController).loadDataInView()
                 }
             }
         }
     }
-
+    
+    func getWistiaData(segue: UIStoryboardSegue) {
+        Alamofire.request(Strings.sharedInstance.wistiaApiUrl, method: .get).validate().responseJSON { response in
+            print("wistia Alamo fire")
+            VideoDataSingleton.sharedInstance.alamoFireAndSwiftyJson(result: response.result)
+            DispatchQueue.main.async {
+                (segue.destination as! VideoTableViewController).loadDataInView()
+            }
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return numberOfItemsInTable

@@ -70,7 +70,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             cell.hashedId = String(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.hashedIdKey]!)
             print(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]!)
             print(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.localUrlKey]!)
-            var downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue) ? Strings.sharedInstance.deletebuttonText : Strings.sharedInstance.downloadbuttonText
+            let downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue) ? Strings.sharedInstance.deletebuttonText : Strings.sharedInstance.downloadbuttonText
             cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
             
             let dateFormatterGet = DateFormatter()
@@ -110,7 +110,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         if !videoSingleton.videoData.isEmpty {
             if videoSingleton.videoData[cellNumber][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue {
                 videoURL = URL(fileURLWithPath: path.appendingPathComponent(videoSingleton.videoData[cellNumber][Strings.sharedInstance.localUrlKey]!))
-                print(videoURL)
+//                print(videoURL)
                 
             } else {
                 videoURL = URL(string: videoSingleton.videoData[cellNumber][Strings.sharedInstance.urlKey]!)

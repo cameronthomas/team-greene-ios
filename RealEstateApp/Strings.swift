@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import SwiftyJSON
+import Alamofire
 
 class Strings {
     static let sharedInstance = Strings()
     private init() { }
     
     let wistiaApiUrl = "https://api.wistia.com/v1/medias.json?api_password=ac9fec394124aecbdf795889bf9ee4c0c2d79c64e37b254b1cc44d3d9c7dfef4"
+    let googleSheetApiUrl = "https://sheets.googleapis.com/v4/spreadsheets/1z9feQnJrTd-jsgJolLlURnWG1D44F0GlDUgKBV6_LB0/values/Active%20Dates?key=AIzaSyACYno_h-uNsgNlcDtRd4CzLufMMPPDjgQ"
     
     let videoDataFilename = "data.plist"
     
@@ -44,14 +47,24 @@ class Strings {
     
     let videoFileType = "mp4"
     
-    let videoActiveDates =  ["2018-01-25 21:55:00", "2018-01-26 22:55:00", "2018-01-28 23:58:00"]
-    
-    let courseExpirationDate = "2018-03-03 15:59:30"
+    var videoActiveDates =  [String]()
+    var courseExpirationDate = ""
     
     let emailAddress1 = "cameroncthomas1@gmail.com"
     let emailAddress2 = "cct2491@gmail.com"
-    
-  
-    // Google Api url used for accessing google sheets
-    // https://sheets.googleapis.com/v4/spreadsheets/1z9feQnJrTd-jsgJolLlURnWG1D44F0GlDUgKBV6_LB0/values/Active%20Dates!B2?key=AIzaSyACYno_h-uNsgNlcDtRd4CzLufMMPPDjgQ
+
+    func getCourseDates(result: Result<Any>) {
+        switch result {
+        case .success(let value):
+            if let videoList = JSON(value).dictionary!["values"] {
+                for video in videoList {
+                    videoActiveDates.append(video.1[0].stringValue)
+                }
+                
+                courseExpirationDate = videoList.arrayValue[0][1].stringValue
+            }
+        case .failure(let error):
+            print(error)
+        }
+    }
 }
