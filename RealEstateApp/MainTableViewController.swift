@@ -19,24 +19,36 @@ class MainTableViewController: UITableViewController {
                 print("new data fetched")
                 
                 Alamofire.request(Strings.sharedInstance.googleSheetApiUrl, method: .get).validate().responseJSON { response in
-                    print("Google alamo fire")
-                    Strings.sharedInstance.getCourseDates(result: response.result)
-                    self.getWistiaData(segue: segue)
+                    print("Google Alamofire request")
+                     switch response.result {
+                     case .success(let value):
+                        Strings.sharedInstance.getCourseDates(value: value)
+                        self.getWistiaData(segue: segue)
+                     case .failure(let error):
+                        ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Alamofire Google sheet request failure: " + error.localizedDescription)
+                        ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
+                    }                    
                 }
             } else {
-                DispatchQueue.main.async {
-                    (segue.destination as! VideoTableViewController).loadDataInView()
-                }
+                Strings.sharedInstance.getCourseDatesFromMem()
+                (segue.destination as! VideoTableViewController).loadDataInView()
             }
         }
     }
     
     func getWistiaData(segue: UIStoryboardSegue) {
         Alamofire.request(Strings.sharedInstance.wistiaApiUrl, method: .get).validate().responseJSON { response in
-            print("wistia Alamo fire")
-            VideoDataSingleton.sharedInstance.alamoFireAndSwiftyJson(result: response.result)
-            DispatchQueue.main.async {
-                (segue.destination as! VideoTableViewController).loadDataInView()
+            print("Wistia Alamofire request")
+            
+            switch response.result {
+            case .success(let value):
+                VideoDataSingleton.sharedInstance.populateVideoDataList(value: value)
+                DispatchQueue.main.async {
+                    (segue.destination as! VideoTableViewController).loadDataInView()
+                }
+            case .failure(let error):
+                ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Alamofire Wistia request failure: " + error.localizedDescription)
+                ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
             }
         }
     }

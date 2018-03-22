@@ -7,66 +7,69 @@
 //
 
 import Foundation
-import Alamofire
 import SwiftyJSON
 
 class VideoDataSingleton {
     static let sharedInstance = VideoDataSingleton()
     private init() { }
     
-    let filePath =  try! FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(Strings.sharedInstance.videoDataFilename)
-    
-    var videoData: [Dictionary<String, String>] {
+    var filePath: URL {
         get {
-            return NSKeyedUnarchiver.unarchiveObject(withFile: filePath.path) as? [Dictionary<String, String>] ?? []
+            do {
+                let tempPath = try FileManager().url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent(Strings.sharedInstance.videoDataFilename)
+                return tempPath
+                
+            } catch {
+                ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Problem creating filepath: VideoDataSingleton " + error.localizedDescription)
+                return URL(fileURLWithPath: "Error")
+            }
+        }
+    }
+
+    var videoData: [Dictionary<String, String>] {
+
+        get {
+            guard let videoDataTemp = NSKeyedUnarchiver.unarchiveObject(withFile: filePath.path) as? [Dictionary<String, String>] else {
+                ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Problem reading videoData from memory: ")
+                return []
+            }
+            
+            return videoDataTemp
         }
         set {
             NSKeyedArchiver.archiveRootObject(newValue, toFile: filePath.path)
         }
     }
     
-    func alamoFireAndSwiftyJson(result: Result<Any>) {
-        switch result {
-        case .success(let value):
-            let json = JSON(value)
-            
-            if let videoList = json.array {
-                for (index, videoObject) in videoList.enumerated() {
-                    var videoDictionary = [String: String]()
+    func populateVideoDataList(value: Any) {
+        if let videoList = JSON(value).array {
+            for (index, videoObject) in videoList.enumerated() {
+                var videoDictionary = [String: String]()
+                
+                if let videoElements = videoObject.dictionary {
+                    videoDictionary[Strings.sharedInstance.nameKey] = videoElements[Strings.sharedInstance.nameKey]?.stringValue
+                    videoDictionary[Strings.sharedInstance.hashedIdKey] = videoElements[Strings.sharedInstance.hashedIdKey]?.stringValue
                     
-                    if let videoElements = videoObject.dictionary {
-                        videoDictionary[Strings.sharedInstance.nameKey] = videoElements[Strings.sharedInstance.nameKey]?.stringValue
-                        videoDictionary[Strings.sharedInstance.hashedIdKey] = videoElements[Strings.sharedInstance.hashedIdKey]?.stringValue
-                        
-                        // if it does not exist then set isDownloaded to false and set local URL to "none"
-                        videoDictionary[Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
-                        videoDictionary[Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
-                        
-                        // Replace line below with array returned from google sheet
-                        videoDictionary[Strings.sharedInstance.activeDateKey] = Strings.sharedInstance.videoActiveDates[index]
-                        
-                        if let assets = videoElements[Strings.sharedInstance.apiAssetsKey]?.array {
-                            videoDictionary[Strings.sharedInstance.urlKey] = assets[1].dictionaryObject![Strings.sharedInstance.apiUrlKey] as? String
-                            self.videoData.append(videoDictionary)
-                            
-                            print()
-                            print(videoDictionary)
-                            print()
-                        }
-                        else {
-                            print("Problem extracting assets array")
-                        }
+                    // if it does not exist then set isDownloaded to false and set local URL to "none"
+                    videoDictionary[Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
+                    videoDictionary[Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
+                    
+                    // Replace line below with array returned from google sheet
+                    videoDictionary[Strings.sharedInstance.activeDateKey] = Strings.sharedInstance.videoActiveDates[index]
+                    videoDictionary[Strings.sharedInstance.expirationDateKey] = Strings.sharedInstance.courseExpirationDate
+                    
+                    if let assets = videoElements[Strings.sharedInstance.apiAssetsKey]?.array {
+                        videoDictionary[Strings.sharedInstance.urlKey] = assets[1].dictionaryObject![Strings.sharedInstance.apiUrlKey] as? String
+                        self.videoData.append(videoDictionary)
+                    } else {
+                        ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Problem extracting assets array")
                     }
-                    else {
-                        print("Problem extracting videoElements")
-                    }
+                } else {
+                    ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Problem extracting videoElements")
                 }
-            } else {
-                print("Problem extracting videoList")
             }
-            
-        case .failure(let error):
-            print(error)
+        } else {
+            ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Problem extracting videoList")
         }
     }
 }

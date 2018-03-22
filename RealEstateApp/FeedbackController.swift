@@ -60,7 +60,6 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         
         // Return if both fields are blank
         guard positiveFeedbackTextView.text != "" || improvementFeedbackTextView.text != "" else {
-            print("blank, gaurd")
             return
         }
         
@@ -77,7 +76,7 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         }
     }
     
-    // MARK: MFMailComposeViewControllerDelegate Method
+    // MFMailComposeViewControllerDelegate Method
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
         
@@ -91,13 +90,21 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         
         mailViewController.setToRecipients([Strings.sharedInstance.emailAddress1, Strings.sharedInstance.emailAddress2])
         
-        // Build HTML for email body
-        if (positiveFeedbackTextView.text != "") {
-            emailBody = "<span style=\"font-weight: bold\">Positive Feedback</span><br/>" + positiveFeedbackTextView.text! + "<br/><br/>"
+        guard let positiveFeedbackText = positiveFeedbackTextView.text,
+            let improvementFeedbackText = improvementFeedbackTextView.text else {
+                ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error creating email: createEmail()")
+                ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
+                self.view.isUserInteractionEnabled = false
+                return
         }
         
-        if (improvementFeedbackTextView.text != "") {
-            emailBody += "<span style=\"font-weight: bold\">Improvement Feedback</span><br/>" + improvementFeedbackTextView.text!
+        // Build HTML for email body
+        if (positiveFeedbackText != "") {
+            emailBody = "<span style=\"font-weight: bold\">Positive Feedback</span><br/>" + positiveFeedbackText + "<br/><br/>"
+        }
+        
+        if (improvementFeedbackText != "") {
+            emailBody += "<span style=\"font-weight: bold\">Improvement Feedback</span><br/>" + improvementFeedbackText
         }
         
         mailViewController.setSubject("Master Class Feedback")

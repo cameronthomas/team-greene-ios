@@ -41,6 +41,7 @@ class Strings {
     let apiUrlKey = "url"
     
     let activeDateKey = "activeDate"
+    let expirationDateKey = "expirationDate"
     
     let VideoTableVCSegueIdentifier = "VideoTableViewControllerSegue"
     let VideoCellIdentifier = "videoCell"
@@ -53,18 +54,41 @@ class Strings {
     let emailAddress1 = "cameroncthomas1@gmail.com"
     let emailAddress2 = "cct2491@gmail.com"
 
-    func getCourseDates(result: Result<Any>) {
-        switch result {
-        case .success(let value):
-            if let videoList = JSON(value).dictionary!["values"] {
-                for video in videoList {
-                    videoActiveDates.append(video.1[0].stringValue)
-                }
-                
-                courseExpirationDate = videoList.arrayValue[0][1].stringValue
+    func getCourseDates(value: Any) {
+        guard let videoDictionary = JSON(value).dictionary
+            else {
+                ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error getting dictionay from JSON: getCourseDates()")
+                return
+        }
+        
+        if let videoList = videoDictionary["values"] {
+            for video in videoList {
+                videoActiveDates.append(video.1[0].stringValue)
             }
-        case .failure(let error):
-            print(error)
+            courseExpirationDate = videoList.arrayValue[0][1].stringValue
+        }
+        else {
+            ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Problem converting Google sheets dates list to Json: getCourseDates()")
+        }
+    }
+    
+    func getCourseDatesFromMem() {
+        let videoData = VideoDataSingleton.sharedInstance.videoData
+        
+        // Get active dates
+        for video in videoData {
+            if let activeDate  = video[Strings.sharedInstance.activeDateKey] {
+                videoActiveDates.append(activeDate)
+            } else {
+                ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error getting active date from mem: getCourseDatesFromMem()")
+            }
+        }
+        
+        // Get expiration date
+        if let expirationDate = videoData[0][Strings.sharedInstance.expirationDateKey] {
+            courseExpirationDate = expirationDate
+        } else {
+            ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error getting expiration date from mem: getCourseDatesFromMem()")
         }
     }
 }

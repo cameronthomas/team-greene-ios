@@ -12,9 +12,7 @@ import AVKit
 class VideoTableViewController: UITableViewController, playVideoDelegate  {
     // Properties
     var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
-    var videoDataRecieved:Data? = nil
     var activityIndicator = UIActivityIndicatorView()
-    var VIDEO_COUNT = 0
     let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                     .userDomainMask, true)[0] as NSString)
     
@@ -34,15 +32,15 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatterGet.timeZone = TimeZone.current
-        let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
         
-        VIDEO_COUNT = videoSingleton.videoData.count
-        
-        if expirationDate! <= Date() {
-            displayExpireError()
-        } else {
-            tableView.reloadData()
+        guard let expirationDate: Date = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate) else {
+            ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error getting expiration date: loadDataInView()")
+            ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
+            self.view.isUserInteractionEnabled = false
+            return
         }
+        
+        expirationDate <= Date() ? displayExpireError() : tableView.reloadData()
     }
     
     /**
@@ -62,38 +60,37 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
      */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Strings.sharedInstance.VideoCellIdentifier, for: indexPath) as! VideoTableViewCell
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatterGet.timeZone = TimeZone.current
         
         if !videoSingleton.videoData.isEmpty {
-            cell.delegate = self
+            cell.videoTableDelegate = self
             cell.cellNumber = indexPath.section
-            cell.videoLabel.text = String(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.nameKey]!)
-            cell.hashedId = String(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.hashedIdKey]!)
-            print(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]!)
-            print(videoSingleton.videoData[indexPath.section][Strings.sharedInstance.localUrlKey]!)
-            let downloadDeleteButtonText = (videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue) ? Strings.sharedInstance.deletebuttonText : Strings.sharedInstance.downloadbuttonText
+            
+            guard let videoLabel = videoSingleton.videoData[indexPath.section][Strings.sharedInstance.nameKey],
+                let hashedId = videoSingleton.videoData[indexPath.section][Strings.sharedInstance.hashedIdKey],
+                let isDownloaded = videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey],
+                let activeDate: Date = dateFormatterGet.date(from: Strings.sharedInstance.videoActiveDates[indexPath.section]),
+                let expirationDate: Date = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
+                else {
+                    ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error pulling values out of videoSingleton: tableView()")
+                    ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
+                    self.view.isUserInteractionEnabled = false
+                    return cell
+            }
+            
+            let downloadDeleteButtonText = (isDownloaded == Strings.sharedInstance.trueValue) ? Strings.sharedInstance.deletebuttonText : Strings.sharedInstance.downloadbuttonText
+            
+            cell.videoLabel.text = videoLabel
+            cell.hashedId = hashedId
             cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
-            
-            let dateFormatterGet = DateFormatter()
-            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            dateFormatterGet.timeZone = TimeZone.current
-            
-            let activeDate: Date? = dateFormatterGet.date(from: videoSingleton.videoData[indexPath.section][Strings.sharedInstance.activeDateKey]!)
-            let expirationDate: Date? = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate)
-            
-            if (activeDate! >= Date() || expirationDate! <= Date()) {
-               changeCellUsability(cell: cell, enableCell: false)
-            }
-            else {
-                changeCellUsability(cell: cell, enableCell: true)
-            }
+            activeDate >= Date() || expirationDate <= Date() ? changeCellUsability(cell: cell, enableCell: false) : changeCellUsability(cell: cell, enableCell: true)
         }
         
-        print("inside cell function")
-
         // If we are at the last element, then the list is done loading
         // Stop activity indicator
         if indexPath.section == videoSingleton.videoData.count - 1 {
-            print("list done loading")
             activityIndicator.stopAnimating()
         }
         
@@ -104,24 +101,25 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
      Play videos
      */
     func playVideo(cellNumber: Int) {
-        var videoURL:URL?
-        var player:AVPlayer
-        
         if !videoSingleton.videoData.isEmpty {
-            if videoSingleton.videoData[cellNumber][Strings.sharedInstance.isDownloadedKey]! == Strings.sharedInstance.trueValue {
-                videoURL = URL(fileURLWithPath: path.appendingPathComponent(videoSingleton.videoData[cellNumber][Strings.sharedInstance.localUrlKey]!))
-//                print(videoURL)
-                
-            } else {
-                videoURL = URL(string: videoSingleton.videoData[cellNumber][Strings.sharedInstance.urlKey]!)
+            guard let isDownloaded = videoSingleton.videoData[cellNumber][Strings.sharedInstance.isDownloadedKey],
+                let localUrl = videoSingleton.videoData[cellNumber][Strings.sharedInstance.localUrlKey],
+                let remoteUrl = videoSingleton.videoData[cellNumber][Strings.sharedInstance.urlKey],
+                let videoURL = isDownloaded == Strings.sharedInstance.trueValue ? URL(fileURLWithPath: path.appendingPathComponent(localUrl)) :
+                    URL(string: remoteUrl)
+                else {
+                    ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error initializing values: playVideo()")
+                    ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
+                    self.view.isUserInteractionEnabled = false
+                    return
             }
             
-            player = AVPlayer(url: videoURL!)
             let playerViewController = AVPlayerViewController()
+            let player = AVPlayer(url: videoURL)
             playerViewController.player = player
-            
+          
             self.present(playerViewController, animated: true) {
-                playerViewController.player!.play()
+                player.play()
             }
         }
     }
@@ -140,7 +138,6 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
      */
     func videosExpiredHandler(alert: UIAlertAction!) {
         print("videosExpiredHandler")
-        
         for cell in tableView.visibleCells {
             let cellObject = cell as! VideoTableViewCell
             if videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.isDownloadedKey] == Strings.sharedInstance.trueValue {
@@ -172,7 +169,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return VIDEO_COUNT
+        return videoSingleton.videoData.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
