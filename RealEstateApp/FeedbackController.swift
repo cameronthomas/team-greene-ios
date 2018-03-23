@@ -3,7 +3,7 @@
 //  RealEstateApp
 //
 //  Created by Cameron Thomas on 7/12/17.
-//  Copyright © 2017 Cameron Thomas. All rights reserved.
+//  Copyright © 2017 Cameron Thomas and Team Green Real Estate. All rights reserved.
 //
 
 import UIKit
@@ -15,9 +15,12 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
     @IBOutlet weak var positiveFeedbackTextView: UITextView!
     @IBOutlet weak var improvementFeedbackTextView: UITextView!
     
+    /**
+     * viewDidLoad
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        
         // Make keyboard disapear when tap outside of textbox
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         self.view.addGestureRecognizer(tapGesture)
@@ -35,6 +38,9 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         improvementFeedbackTextView.tag = 1
     }
     
+    /**
+     * Text View Did Begin Editing
+     */
     func textViewDidBeginEditing(_ textView: UITextView) {
         scrollView.isScrollEnabled = true
         
@@ -45,17 +51,26 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         }
     }
     
+    /**
+     * Text View Did End Editing
+     */
     func textViewDidEndEditing(_ textView: UITextView) {
         scrollView.isScrollEnabled = false
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
 
+    /**
+     * Dismiss keyboard
+     */
     func dismissKeyboard() {
         view.endEditing(true)
     }
     
-    // Followed example at https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/
-    // for sending emails
+    /**
+     * Send Feedback Email
+     * Followed example at https://www.andrewcbancroft.com/2014/08/25/send-email-in-app-using-mfmailcomposeviewcontroller-with-swift/
+     * for sending emails
+     */
     @IBAction func sendFeedbackEmail(_ sender: UIButton) {
         
         // Return if both fields are blank
@@ -76,7 +91,9 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         }
     }
     
-    // MFMailComposeViewControllerDelegate Method
+    /**
+     * Mail Compose Controller
+     */
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
         
@@ -84,12 +101,15 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         improvementFeedbackTextView.text = ""
     }
     
-    // Create email with feedback
+    /**
+     * Create email with feedback
+     */
     func createEmail(_ mailViewController: MFMailComposeViewController) {
         var emailBody = ""
         
-        mailViewController.setToRecipients([Strings.sharedInstance.emailAddress1, Strings.sharedInstance.emailAddress2])
+        mailViewController.setToRecipients([Strings.sharedInstance.emailAddress1, Strings.sharedInstance.emailAddress2]) // Set recipients
         
+        // Get feedback from text views
         guard let positiveFeedbackText = positiveFeedbackTextView.text,
             let improvementFeedbackText = improvementFeedbackTextView.text else {
                 ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error creating email: createEmail()")

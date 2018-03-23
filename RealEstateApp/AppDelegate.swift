@@ -3,7 +3,7 @@
 //  RealEstateApp
 //
 //  Created by Cameron Thomas on 6/29/17.
-//  Copyright © 2017 Cameron Thomas. All rights reserved.
+//  Copyright © 2017 Cameron Thomas and Team Green Real Estate. All rights reserved.
 //
 
 import UIKit

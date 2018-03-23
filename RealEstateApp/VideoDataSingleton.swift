@@ -3,7 +3,7 @@
 //  RealEstateApp
 //
 //  Created by Cameron Thomas on 1/15/18.
-//  Copyright © 2018 Cameron Thomas. All rights reserved.
+//  Copyright © 2018 Cameron Thomas and Team Green Real Estate. All rights reserved.
 //
 
 import Foundation
@@ -13,6 +13,7 @@ class VideoDataSingleton {
     static let sharedInstance = VideoDataSingleton()
     private init() { }
     
+    // Get file for video data list
     var filePath: URL {
         get {
             do {
@@ -26,6 +27,7 @@ class VideoDataSingleton {
         }
     }
 
+    // Define video data list
     var videoData: [Dictionary<String, String>] {
 
         get {
@@ -37,16 +39,21 @@ class VideoDataSingleton {
             return videoDataTemp
         }
         set {
+            // Save list to docs dir
             NSKeyedArchiver.archiveRootObject(newValue, toFile: filePath.path)
         }
     }
     
+    /**
+     * Populate Video Data List
+     */
     func populateVideoDataList(value: Any) {
         if let videoList = JSON(value).array {
             for (index, videoObject) in videoList.enumerated() {
                 var videoDictionary = [String: String]()
                 
                 if let videoElements = videoObject.dictionary {
+                    // Save name and hased id
                     videoDictionary[Strings.sharedInstance.nameKey] = videoElements[Strings.sharedInstance.nameKey]?.stringValue
                     videoDictionary[Strings.sharedInstance.hashedIdKey] = videoElements[Strings.sharedInstance.hashedIdKey]?.stringValue
                     
@@ -54,10 +61,11 @@ class VideoDataSingleton {
                     videoDictionary[Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
                     videoDictionary[Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
                     
-                    // Replace line below with array returned from google sheet
+                    // Save active and expiration dates
                     videoDictionary[Strings.sharedInstance.activeDateKey] = Strings.sharedInstance.videoActiveDates[index]
                     videoDictionary[Strings.sharedInstance.expirationDateKey] = Strings.sharedInstance.courseExpirationDate
                     
+                    // Save remote url
                     if let assets = videoElements[Strings.sharedInstance.apiAssetsKey]?.array {
                         videoDictionary[Strings.sharedInstance.urlKey] = assets[1].dictionaryObject![Strings.sharedInstance.apiUrlKey] as? String
                         self.videoData.append(videoDictionary)

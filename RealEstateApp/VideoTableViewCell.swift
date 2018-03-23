@@ -3,7 +3,7 @@
 //  RealEstateApp
 //
 //  Created by Cameron Thomas on 11/12/17.
-//  Copyright © 2017 Cameron Thomas. All rights reserved.
+//  Copyright © 2017 Cameron Thomas and Team Green Real Estate. All rights reserved.
 //
 
 import UIKit
@@ -26,13 +26,15 @@ class VideoTableViewCell: UITableViewCell
     var hashedId = ""
     let fileManager = FileManager.default
     let documentsPath = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                             .userDomainMask, true)[0] as NSString)
+                                                             .userDomainMask, true)[0] as NSString) // Path to docs dir to save and delete videos
     
+    /**
+     * Download/Delete Button Action
+     */
     @IBAction func downloadDeleteButtonAction(_ sender: UIButton) {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
         dateFormatterGet.timeZone = TimeZone.current
-        
         
         guard let delegate = videoTableDelegate else  {
             ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Delegate not set: downloadDeleteButtonAction()")
@@ -65,12 +67,12 @@ class VideoTableViewCell: UITableViewCell
                 if error != nil {
                     ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error in downloading video: downloadDeleteButtonAction() "
                         + error.debugDescription)
-                    //  print(error ?? "Problem with error in creating URL for video metadata")
                 } else {
                     
+                    // Save video file
                     self.fileManager.createFile(atPath: self.documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType), contents: data, attributes: nil)
                     
-                    // Update vidData list
+                    // Update videoData list
                     self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
                     self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.trueValue
                     
@@ -103,6 +105,9 @@ class VideoTableViewCell: UITableViewCell
         }
     }
     
+    /**
+     * Delete Video
+     */
     func deleteVideo() {
         // Delete from documents
         do {
@@ -113,6 +118,9 @@ class VideoTableViewCell: UITableViewCell
         }
     }
     
+    /**
+     * Selected cell func
+     */
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -133,6 +141,7 @@ class VideoTableViewCell: UITableViewCell
                     return
             }
             
+            // Check if course is expired
             expirationDate > Date() ? delegate.playVideo(cellNumber: cellNumber) : delegate.displayExpireError()
         }
     }

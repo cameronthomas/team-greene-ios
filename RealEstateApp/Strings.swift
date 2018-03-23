@@ -3,7 +3,7 @@
 //  RealEstateApp
 //
 //  Created by Cameron Thomas on 1/15/18.
-//  Copyright © 2018 Cameron Thomas. All rights reserved.
+//  Copyright © 2018 Cameron Thomas and Team Green Real Estate. All rights reserved.
 //
 
 import Foundation
@@ -54,13 +54,19 @@ class Strings {
     let emailAddress1 = "cameroncthomas1@gmail.com"
     let emailAddress2 = "cct2491@gmail.com"
 
+    /**
+     * Get Course Dates from google sheet response
+     */
     func getCourseDates(value: Any) {
+        
+        // Verify dictionary from google sheets
         guard let videoDictionary = JSON(value).dictionary
             else {
                 ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error getting dictionay from JSON: getCourseDates()")
                 return
         }
         
+        // Save active and expiration dates to Strings singleton
         if let videoList = videoDictionary["values"] {
             for video in videoList {
                 videoActiveDates.append(video.1[0].stringValue)
@@ -72,6 +78,9 @@ class Strings {
         }
     }
     
+    /**
+     * Get Course Dates from docs dir
+     */
     func getCourseDatesFromMem() {
         let videoData = VideoDataSingleton.sharedInstance.videoData
         

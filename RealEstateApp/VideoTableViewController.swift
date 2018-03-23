@@ -3,7 +3,7 @@
 //  RealEstateApp
 //
 //  Created by Cameron Thomas on 10/30/17.
-//  Copyright © 2017 Cameron Thomas. All rights reserved.
+//  Copyright © 2017 Cameron Thomas and Team Green Real Estate. All rights reserved.
 //
 
 import UIKit
@@ -14,10 +14,10 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
     var activityIndicator = UIActivityIndicatorView()
     let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                    .userDomainMask, true)[0] as NSString)
+                                                    .userDomainMask, true)[0] as NSString) // Path to access videos story in documents 
     
     /**
-     View did load
+     * View did load
      */
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     /**
-     Load data into table
+     * Load data into table
      */
     func loadDataInView() {
         print("loadDataInView")
@@ -40,11 +40,11 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             return
         }
         
-        expirationDate <= Date() ? displayExpireError() : tableView.reloadData()
+        expirationDate <= Date() ? displayExpireError() : tableView.reloadData() // Display error and disable videos if course is expired
     }
     
     /**
-     Create load indicator
+     * Create load indicator
      */
     func createActivityIndicator() {
         activityIndicator.transform = CGAffineTransform(scaleX: 3.75, y: 3.75)
@@ -56,7 +56,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     /**
-     Run for creation of each cell
+     * Run for creation of each cell
      */
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Strings.sharedInstance.VideoCellIdentifier, for: indexPath) as! VideoTableViewCell
@@ -68,6 +68,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             cell.videoTableDelegate = self
             cell.cellNumber = indexPath.section
             
+            // Initialize function constants and check for errors
             guard let videoLabel = videoSingleton.videoData[indexPath.section][Strings.sharedInstance.nameKey],
                 let hashedId = videoSingleton.videoData[indexPath.section][Strings.sharedInstance.hashedIdKey],
                 let isDownloaded = videoSingleton.videoData[indexPath.section][Strings.sharedInstance.isDownloadedKey],
@@ -85,6 +86,8 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             cell.videoLabel.text = videoLabel
             cell.hashedId = hashedId
             cell.downloadDeleteButton.setTitle(downloadDeleteButtonText, for: .normal)
+            
+            // Set cell usability based on active and expiration dates
             activeDate >= Date() || expirationDate <= Date() ? changeCellUsability(cell: cell, enableCell: false) : changeCellUsability(cell: cell, enableCell: true)
         }
         
@@ -98,15 +101,16 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     /**
-     Play videos
+     * Play videos
      */
     func playVideo(cellNumber: Int) {
         if !videoSingleton.videoData.isEmpty {
+            // Initialize function constants and check for errors
             guard let isDownloaded = videoSingleton.videoData[cellNumber][Strings.sharedInstance.isDownloadedKey],
                 let localUrl = videoSingleton.videoData[cellNumber][Strings.sharedInstance.localUrlKey],
                 let remoteUrl = videoSingleton.videoData[cellNumber][Strings.sharedInstance.urlKey],
                 let videoURL = isDownloaded == Strings.sharedInstance.trueValue ? URL(fileURLWithPath: path.appendingPathComponent(localUrl)) :
-                    URL(string: remoteUrl)
+                    URL(string: remoteUrl) // Get local url if downloaded, get remote url otherwise.
                 else {
                     ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error initializing values: playVideo()")
                     ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
@@ -114,10 +118,10 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
                     return
             }
             
+            // Prepare for and play video
             let playerViewController = AVPlayerViewController()
             let player = AVPlayer(url: videoURL)
             playerViewController.player = player
-          
             self.present(playerViewController, animated: true) {
                 player.play()
             }
@@ -125,7 +129,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     /**
-     Display error message when course has expired
+     * Display error message when course has expired
      */
     func displayExpireError() {
         let alert = UIAlertController(title: "Error", message: "The course has ended and all videos have expired.", preferredStyle: UIAlertControllerStyle.alert)
@@ -134,16 +138,19 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     /**
-     Take necesary actions when course has expired
+     * Take necesary actions when course has expired
      */
     func videosExpiredHandler(alert: UIAlertAction!) {
         print("videosExpiredHandler")
+        
+        // Delete all video downloads
         for cell in tableView.visibleCells {
             let cellObject = cell as! VideoTableViewCell
             if videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.isDownloadedKey] == Strings.sharedInstance.trueValue {
                 cellObject.deleteVideo()
             }
             
+            // Update video data list in memory
             videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.localUrlKey] = Strings.sharedInstance.localUrlEmptyValue
             videoSingleton.videoData[cellObject.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.falseValue
         }
@@ -152,7 +159,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     /**
-     Toggle whether cell is enabled
+     * Toggle whether cell is enabled
      */
     func changeCellUsability(cell: VideoTableViewCell, enableCell: Bool) {
         if (enableCell) {
@@ -171,7 +178,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
         // #warning Incomplete implementation, return the number of sections
         return videoSingleton.videoData.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 1
