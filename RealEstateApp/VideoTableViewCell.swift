@@ -16,17 +16,14 @@ protocol playVideoDelegate: NSObjectProtocol {
 
 class VideoTableViewCell: UITableViewCell
 {
-    var cellNumber = -1
-    weak var videoTableDelegate: playVideoDelegate? = nil
-    var activityIndicator = UIActivityIndicatorView()
-    var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
     @IBOutlet weak var cellContentView: UIView!
     @IBOutlet weak var videoLabel: UILabel!
     @IBOutlet weak var downloadDeleteButton: UIButton!
+    var cellNumber = -1
+    weak var videoTableDelegate: playVideoDelegate? = nil
+    var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
     var hashedId = ""
     let fileManager = FileManager.default
-    let documentsPath = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                             .userDomainMask, true)[0] as NSString) // Path to docs dir to save and delete videos
     
     /**
      * Download/Delete Button Action
@@ -70,7 +67,7 @@ class VideoTableViewCell: UITableViewCell
                 } else {
                     
                     // Save video file
-                    self.fileManager.createFile(atPath: self.documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType), contents: data, attributes: nil)
+                    self.fileManager.createFile(atPath: Strings.sharedInstance.documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType), contents: data, attributes: nil)
                     
                     // Update videoData list
                     self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
@@ -111,7 +108,7 @@ class VideoTableViewCell: UITableViewCell
     func deleteVideo() {
         // Delete from documents
         do {
-            try fileManager.removeItem(atPath: documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType))
+            try fileManager.removeItem(atPath: Strings.sharedInstance.documentsPath.appendingPathComponent(self.hashedId + "." + Strings.sharedInstance.videoFileType))
         }
         catch {
             ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error deleting file:" + error.localizedDescription)
@@ -143,7 +140,7 @@ class VideoTableViewCell: UITableViewCell
             
             // Check if course is expired
             expirationDate > Date() ? delegate.playVideo(cellNumber: cellNumber) : delegate.displayExpireError()
-        }   
+        }
     }
     
     override func awakeFromNib() {

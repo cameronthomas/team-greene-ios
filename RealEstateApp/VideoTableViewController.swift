@@ -13,8 +13,6 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     // Properties
     var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
     var activityIndicator = UIActivityIndicatorView()
-    let path = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                    .userDomainMask, true)[0] as NSString) // Path to access videos story in documents 
     
     /**
      * View did load
@@ -109,7 +107,7 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             guard let isDownloaded = videoSingleton.videoData[cellNumber][Strings.sharedInstance.isDownloadedKey],
                 let localUrl = videoSingleton.videoData[cellNumber][Strings.sharedInstance.localUrlKey],
                 let remoteUrl = videoSingleton.videoData[cellNumber][Strings.sharedInstance.urlKey],
-                let videoURL = isDownloaded == Strings.sharedInstance.trueValue ? URL(fileURLWithPath: path.appendingPathComponent(localUrl)) :
+                let videoURL = isDownloaded == Strings.sharedInstance.trueValue ? URL(fileURLWithPath: Strings.sharedInstance.documentsPath.appendingPathComponent(localUrl)) :
                     URL(string: remoteUrl) // Get local url if downloaded, get remote url otherwise.
                 else {
                     ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error initializing values: playVideo()")
