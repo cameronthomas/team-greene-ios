@@ -143,7 +143,7 @@ class VideoTableViewCell: UITableViewCell
             
             // Check if course is expired
             expirationDate > Date() ? delegate.playVideo(cellNumber: cellNumber) : delegate.displayExpireError()
-        }
+        }   
     }
     
     override func awakeFromNib() {

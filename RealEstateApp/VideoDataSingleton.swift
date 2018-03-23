@@ -39,7 +39,7 @@ class VideoDataSingleton {
             return videoDataTemp
         }
         set {
-            // Save list to docs dir
+            // Archive video data list
             NSKeyedArchiver.archiveRootObject(newValue, toFile: filePath.path)
         }
     }
