@@ -73,6 +73,47 @@ class VideoTableViewCell: UITableViewCell
                     self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.localUrlKey] = self.hashedId + "." + Strings.sharedInstance.videoFileType
                     self.videoSingleton.videoData[self.cellNumber][Strings.sharedInstance.isDownloadedKey] = Strings.sharedInstance.trueValue
                     
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    //////
+                    // DELETE THIS CODE
+                    //////
+                    let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    do {
+                        
+                        let fileURLs = try self.fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+                        
+                        print("Docs directory after Add:")
+                        print(fileURLs)
+                        print()
+                        // process files
+                    } catch {
+                        print("Error while enumerating files \(documentsURL): \(error.localizedDescription)")
+                    }
+                    //////
+                    // DELETE THIS CODE
+                    //////
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     // Update UI
                     DispatchQueue.main.async {
                         // Change button title
@@ -113,6 +154,38 @@ class VideoTableViewCell: UITableViewCell
         catch {
             ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error deleting file:" + error.localizedDescription)
         }
+        
+        
+        
+        
+        
+        
+        //////
+        // DELETE THIS CODE
+        //////
+        let documentsURL = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        do {
+            
+            let fileURLs = try self.fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+            
+            print("Docs directory after delete:")
+            print(fileURLs)
+            print()
+            // process files
+        } catch {
+            print("Error while enumerating files \(documentsURL): \(error.localizedDescription)")
+        }
+        //////
+        // DELETE THIS CODE
+        //////
+        
+        
+        
+        
+        
+        
+        
+        
     }
     
     /**

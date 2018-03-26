@@ -87,12 +87,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
             
             // Set cell usability based on active and expiration dates
             activeDate >= Date() || expirationDate <= Date() ? changeCellUsability(cell: cell, enableCell: false) : changeCellUsability(cell: cell, enableCell: true)
-        }
-        
-        // If we are at the last element, then the list is done loading
-        // Stop activity indicator
-        if indexPath.section == videoSingleton.videoData.count - 1 {
-            activityIndicator.stopAnimating()
+            
+            // If we are at the last element, then the list is done loading
+            // Stop activity indicator
+            if indexPath.section == videoSingleton.videoData.count - 1 {
+                activityIndicator.stopAnimating()
+            }
         }
         
         return cell
@@ -115,6 +115,12 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
                     self.view.isUserInteractionEnabled = false
                     return
             }
+            
+            print("localURL:", localUrl)
+            print("remoteURL:", remoteUrl)
+            print("videoURL:", videoURL.absoluteString)
+            
+            
             
             // Prepare for and play video
             let playerViewController = AVPlayerViewController()

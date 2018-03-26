@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		310E89EE206326250049C4D2 /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 310E89ED206326250049C4D2 /* ErrorHandling.swift */; };
 		31190DC61FB9567000992AA0 /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */; };
+		3119F7112069B6BA00C6DF8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3119F7102069B6BA00C6DF8D /* Assets.xcassets */; };
 		311AEC1B1F0597B1001408F6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC1A1F0597B1001408F6 /* AppDelegate.swift */; };
 		311AEC201F0597B1001408F6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311AEC1E1F0597B1001408F6 /* Main.storyboard */; };
 		311AEC231F0597B1001408F6 /* RealEstateApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC211F0597B1001408F6 /* RealEstateApp.xcdatamodeld */; };
-		311AEC251F0597B1001408F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 311AEC241F0597B1001408F6 /* Assets.xcassets */; };
 		311AEC281F0597B1001408F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 311AEC261F0597B1001408F6 /* LaunchScreen.storyboard */; };
 		311AEC331F0597B2001408F6 /* RealEstateAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC321F0597B2001408F6 /* RealEstateAppTests.swift */; };
 		311AEC3E1F0597B2001408F6 /* RealEstateAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311AEC3D1F0597B2001408F6 /* RealEstateAppUITests.swift */; };
@@ -47,11 +47,11 @@
 /* Begin PBXFileReference section */
 		310E89ED206326250049C4D2 /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
 		31190DC51FB9567000992AA0 /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		3119F7102069B6BA00C6DF8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		311AEC171F0597B1001408F6 /* RealEstateApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealEstateApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		311AEC1A1F0597B1001408F6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		311AEC1F1F0597B1001408F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		311AEC221F0597B1001408F6 /* RealEstateApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealEstateApp.xcdatamodel; sourceTree = "<group>"; };
-		311AEC241F0597B1001408F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		311AEC271F0597B1001408F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		311AEC291F0597B1001408F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		311AEC2E1F0597B2001408F6 /* RealEstateAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealEstateAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -139,8 +139,8 @@
 				31424211200DAECA009EB2F7 /* Strings.swift */,
 				3142420F200D58E2009EB2F7 /* VideoDataSingleton.swift */,
 				310E89ED206326250049C4D2 /* ErrorHandling.swift */,
+				3119F7102069B6BA00C6DF8D /* Assets.xcassets */,
 				311AEC1E1F0597B1001408F6 /* Main.storyboard */,
-				311AEC241F0597B1001408F6 /* Assets.xcassets */,
 				311AEC261F0597B1001408F6 /* LaunchScreen.storyboard */,
 				311AEC291F0597B1001408F6 /* Info.plist */,
 				3138AC191F27D38000E5DB39 /* GoogleService-Info.plist */,
@@ -301,7 +301,7 @@
 			files = (
 				311AEC281F0597B1001408F6 /* LaunchScreen.storyboard in Resources */,
 				3138AC1A1F27D38000E5DB39 /* GoogleService-Info.plist in Resources */,
-				311AEC251F0597B1001408F6 /* Assets.xcassets in Resources */,
+				3119F7112069B6BA00C6DF8D /* Assets.xcassets in Resources */,
 				311AEC201F0597B1001408F6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

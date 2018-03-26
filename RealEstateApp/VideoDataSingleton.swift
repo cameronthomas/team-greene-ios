@@ -13,6 +13,8 @@ class VideoDataSingleton {
     static let sharedInstance = VideoDataSingleton()
     private init() { }
     
+    let fileManager = FileManager.default
+    
     // Get file for video data list
     var filePath: URL {
         get {
@@ -26,11 +28,17 @@ class VideoDataSingleton {
             }
         }
     }
-
+    
     // Define video data list
     var videoData: [Dictionary<String, String>] {
-
         get {
+            // Check if file doesn't exist
+            if !fileManager.fileExists(atPath: filePath.path) {
+                print("File does no exists")
+                return []
+            }
+            
+            // Check for problem loading file
             guard let videoDataTemp = NSKeyedUnarchiver.unarchiveObject(withFile: filePath.path) as? [Dictionary<String, String>] else {
                 ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Problem reading videoData from memory: ")
                 return []

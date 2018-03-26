@@ -107,11 +107,11 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
     func createEmail(_ mailViewController: MFMailComposeViewController) {
         var emailBody = ""
         
-        mailViewController.setToRecipients([Strings.sharedInstance.emailAddress1, Strings.sharedInstance.emailAddress2]) // Set recipients
+        mailViewController.setToRecipients([Strings.sharedInstance.emailAddress1, Strings.sharedInstance.emailAddress2, Strings.sharedInstance.emailAddress3]) // Set recipients
         
         // Get feedback from text views
-        guard let positiveFeedbackText = positiveFeedbackTextView.text,
-            let improvementFeedbackText = improvementFeedbackTextView.text else {
+        guard let positiveFeedbackText = positiveFeedbackTextView?.text,
+            let improvementFeedbackText = improvementFeedbackTextView?.text else {
                 ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error creating email: createEmail()")
                 ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
                 self.view.isUserInteractionEnabled = false

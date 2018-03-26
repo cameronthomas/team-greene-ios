@@ -53,6 +53,7 @@ class Strings {
     
     let emailAddress1 = "cameroncthomas1@gmail.com"
     let emailAddress2 = "cct2491@gmail.com"
+    let emailAddress3 = "tho09041@byui.edu"
     
     let documentsPath = (NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                              .userDomainMask, true)[0] as NSString) // Path to docs dir to save and delete videos
