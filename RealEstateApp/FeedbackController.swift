@@ -109,6 +109,7 @@ class FeedbackController: UIViewController, MFMailComposeViewControllerDelegate,
         
         mailViewController.setToRecipients([Strings.sharedInstance.emailAddress1, Strings.sharedInstance.emailAddress2, Strings.sharedInstance.emailAddress3]) // Set recipients
         
+        
         // Get feedback from text views
         guard let positiveFeedbackText = positiveFeedbackTextView?.text,
             let improvementFeedbackText = improvementFeedbackTextView?.text else {
