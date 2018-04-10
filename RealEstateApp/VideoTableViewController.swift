@@ -14,7 +14,6 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     // Properties
     var videoSingleton:VideoDataSingleton = VideoDataSingleton.sharedInstance
     var activityIndicator = UIActivityIndicatorView()
-    let playerViewController = AVPlayerViewController()
     
     /**
      * View did load
@@ -25,22 +24,34 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     }
     
     /**
+     * View did appear
+     */
+    override func viewDidAppear(_ animated: Bool) {
+        if !videoSingleton.videoData.isEmpty {
+            let dateFormatterGet = DateFormatter()
+            dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatterGet.timeZone = TimeZone.current
+
+            guard let expirationDate: Date = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate) else {
+                ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error getting expiration date: loadDataInView()")
+                ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
+                self.view.isUserInteractionEnabled = false
+                return
+            }
+            
+            if expirationDate <= Date() {
+                displayExpireError()
+            }
+        }
+    }
+    
+    /**
      * Load data into table
      */
     func loadDataInView() {
         print("loadDataInView")
-        let dateFormatterGet = DateFormatter()
-        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateFormatterGet.timeZone = TimeZone.current
-        
-        guard let expirationDate: Date = dateFormatterGet.date(from: Strings.sharedInstance.courseExpirationDate) else {
-            ErrorHandling.sharedInstance.displayConsoleErrorMessage(message: "Error getting expiration date: loadDataInView()")
-            ErrorHandling.sharedInstance.displayUIErrorMessage(sender: self)
-            self.view.isUserInteractionEnabled = false
-            return
-        }
-        
-        expirationDate <= Date() ? displayExpireError() : tableView.reloadData() // Display error and disable videos if course is expired
+        tableView.reloadData()
+        self.viewDidAppear(false)
     }
     
     /**
@@ -117,110 +128,16 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
                     self.view.isUserInteractionEnabled = false
                     return
             }
- 
-            print(AVFoundation.AVVideoCodecH264)
             
-            // Prepare for and play video
-            let asset = AVURLAsset(url: videoURL, options: nil)
-            
-
-            
-            
-            let assetKeys = [
-                "playable",
-                "hasProtectedContent"
-            ]
-            
-         //   var playerItemContext = 0
-            
-            
-            let avPlayerItem = AVPlayerItem(asset: asset, automaticallyLoadedAssetKeys: assetKeys)
-           // avPlayerItem.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), options: [.new], context: &playerItemContext)
-            
-            let player = AVPlayer(playerItem: avPlayerItem)
-            
+            let player = AVPlayer(url: videoURL)
+            let playerViewController = AVPlayerViewController()
             playerViewController.player = player
-            
-            //            self.observe = avPlayerItem.observe("status", options: [.new], changeHandler: { (playerItem, change) in
-            //                if playerItem.status == .readyToPlay {
-            //                    print("asdf")
-            //                }
-            //            })
-            
-         //   print(playerViewController.isReadyForDisplay)
-         //   playerViewController.addObserver(self, forKeyPath: #keyPath(AVPlayerViewController.isReadyForDisplay), options: [.new], context: nil)
-            
-            
             
             self.present(playerViewController, animated: true) {
                 player.play()
-                //  playerViewController.player?.play()
-            }
-            
-
-        }
-    }
-    
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if keyPath == #keyPath(AVPlayerViewController.isReadyForDisplay) {
-            if (object as! AVPlayerViewController).isReadyForDisplay == true {
-                print("ready:", self.playerViewController.isReadyForDisplay)
-                self.present(self.playerViewController, animated: true) {
-                    //player.play()
-                    self.playerViewController.player?.play()
-                }
             }
         }
-       // self.playerViewController.removeObserver(self, forKeyPath: #keyPath(AVPlayerViewController.isReadyForDisplay))
-        
-        //        if keyPath == #keyPath(AVPlayerItem.status) {
-//            let status: AVPlayerItemStatus
-//
-//            // Get the status change from the change dictionary
-//            if let statusNumber = change?[.newKey] as? NSNumber {
-//                status = AVPlayerItemStatus(rawValue: statusNumber.intValue)!
-//            } else {
-//                status = .unknown
-//            }
-//
-//            // Switch over the status
-//            switch status {
-//            case .readyToPlay:
-//                print("ready to play")
-//                self.present(playerViewController, animated: true) {
-//                    self.playerViewController.player?.play()
-//                }
-//            case .failed:
-//                print("failed")
-//            case .unknown:
-//                print("Unknown")
-//            }
-//        }
-//
-//
-        
-        
-        
-        
-        
-        
-        
-        //        let temp = object as! AVPlayerItem
-        //        print("status:", temp.status.rawValue)
-        //
-        //
-        //
-        //        if temp.status.rawValue == 1 {
-        //            print("observer")
-        //            self.present(playerViewController, animated: true) {
-        //                //  player.play()
-        //                self.playerViewController.player?.play()
-        //            }
-        //        }
     }
-    
     
     /**
      * Display error message when course has expired
@@ -228,7 +145,9 @@ class VideoTableViewController: UITableViewController, playVideoDelegate  {
     func displayExpireError() {
         let alert = UIAlertController(title: "Error", message: "The course has ended and all videos have expired.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: videosExpiredHandler))
+
         self.present(alert, animated: true, completion: nil)
+
     }
     
     /**
